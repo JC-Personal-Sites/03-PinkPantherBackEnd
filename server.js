@@ -57,6 +57,7 @@ connectDB();
 const appendixRoute = require('./_routes/Appendix/Appendix-Routes');
 const pictureRoute = require('./_routes/Picture/Picture-Routes');
 const videoRoute = require('./_routes/Video/Video-Routes');
+const userRoute = require('./_routes/Users/User-Routes');
 // ================================================
 
 // ================================================
@@ -64,6 +65,7 @@ const videoRoute = require('./_routes/Video/Video-Routes');
 app.use('/appendix', appendixRoute);
 app.use('/picture', pictureRoute);
 app.use('/video', videoRoute);
+app.use('/user', userRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const VideosSchema = new mongoose.Schema(
+const VideoSchema = new mongoose.Schema(
 	{
 		title: { type: String, required: [true, 'Required'] },
 		url: { type: String, required: [true, 'Required'] },
@@ -9,8 +9,9 @@ const VideosSchema = new mongoose.Schema(
 		likes: { type: String },
 		source: { type: String, required: [true, 'Required'] },
 	},
-	{ collection: 'PinkPantherVideos' }
+	{
+		versionKey: false,
+	}
 );
 
-// You can add all sorts to control the data i.e. Regex - check the mongoose docs https://mongoosejs.com/
-module.exports = mongoose.model('VideoModel', VideosSchema);
+module.exports = mongoose.model('Pinkpanthervideo', VideoSchema);

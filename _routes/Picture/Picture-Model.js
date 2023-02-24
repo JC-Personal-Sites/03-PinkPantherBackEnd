@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PicturesSchema = new mongoose.Schema(
+const PictureSchema = new mongoose.Schema(
 	{
 		title: { type: String, required: [true, 'Required'] },
 		url: { type: String, required: [true, 'Required'] },
@@ -8,8 +8,9 @@ const PicturesSchema = new mongoose.Schema(
 		comments: { type: String },
 		likes: { type: String },
 	},
-	{ collection: 'PinkPantherPictures' }
+	{
+		versionKey: false,
+	}
 );
 
-// You can add all sorts to control the data i.e. Regex - check the mongoose docs https://mongoosejs.com/
-module.exports = mongoose.model('PictureModel', PicturesSchema);
+module.exports = mongoose.model('Pinkpantherpicture', PictureSchema);
