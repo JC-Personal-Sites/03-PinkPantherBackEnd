@@ -10,6 +10,7 @@ const AppendixSchema = new mongoose.Schema(
 		topic: { type: String, required: [true, 'Required'] },
 	},
 	{
+		collection: 'pinkpantherappendixs',
 		versionKey: false,
 	}
 );

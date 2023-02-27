@@ -5,7 +5,7 @@ const asyncHandler = require('../../middleware/async');
 exports.getAppendixs = asyncHandler(async (req, res, next) => {
 	try {
 		const appendixs = await AppendixSchema.find();
-
+		
 		res.status(200).json({ data: appendixs });
 	} catch (err) {
 		return next(new ErrorResponse(`Data not found`, 500));
