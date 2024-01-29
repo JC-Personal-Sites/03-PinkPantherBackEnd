@@ -14,4 +14,4 @@ const VideoSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpanthervideo', VideoSchema);
+module.exports = mongoose.model('Pinkpanthervideos', VideoSchema);

@@ -11,4 +11,4 @@ const NavBarSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpanthernavbar', NavBarSchema);
+module.exports = mongoose.model('Pinkpanthernavbars', NavBarSchema);

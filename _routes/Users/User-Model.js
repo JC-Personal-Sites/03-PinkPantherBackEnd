@@ -14,4 +14,4 @@ const UserSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpantheruser', UserSchema);
+module.exports = mongoose.model('Pinkpantherusers', UserSchema);

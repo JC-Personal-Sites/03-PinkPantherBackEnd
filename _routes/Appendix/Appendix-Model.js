@@ -14,4 +14,4 @@ const AppendixSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpantherappendix', AppendixSchema);
+module.exports = mongoose.model('Pinkpantherappendixs', AppendixSchema);

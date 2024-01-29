@@ -13,4 +13,4 @@ const PictureSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpantherpicture', PictureSchema);
+module.exports = mongoose.model('Pinkpantherpictures', PictureSchema);

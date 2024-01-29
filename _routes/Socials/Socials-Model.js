@@ -12,4 +12,4 @@ const SocialsSchema = new mongoose.Schema(
 	}
 );
 
-module.exports = mongoose.model('Pinkpanthersocial', SocialsSchema);
+module.exports = mongoose.model('Pinkpanthersocials', SocialsSchema);
