@@ -1,7 +1,7 @@
 const express = require('express');
-const { getVideos } = require('./Video-Controller');
+const { getSocials } = require('./Socials-Controller');
 const router = express.Router();
 
-router.route('/').get(getVideos)
+router.route('/').get(getSocials)
 
 module.exports = router;

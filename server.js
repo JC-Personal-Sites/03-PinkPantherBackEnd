@@ -55,7 +55,9 @@ connectDB();
 // ================================================
 // Setting Route File variables with there base URL
 const appendixRoute = require('./_routes/Appendix/Appendix-Routes');
+const navBarRoute = require('./_routes/NavBar/NavBar-Routes');
 const pictureRoute = require('./_routes/Picture/Picture-Routes');
+const socialsRoute = require('./_routes/Socials/Socials-Routes');
 const videoRoute = require('./_routes/Video/Video-Routes');
 const userRoute = require('./_routes/Users/User-Routes');
 // ================================================
@@ -63,7 +65,9 @@ const userRoute = require('./_routes/Users/User-Routes');
 // ================================================
 // Mount Routers
 app.use('/appendix', appendixRoute);
+app.use('/navBar', navBarRoute);
 app.use('/picture', pictureRoute);
+app.use('/socials', socialsRoute);
 app.use('/video', videoRoute);
 app.use('/user', userRoute);
 // ================================================

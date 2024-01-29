@@ -1,12 +1,12 @@
-const VideoSchema = require('./Video-Model');
+const SocialsSchema = require('./Socials-Model');
 const ErrorResponse = require('../../utils/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
-exports.getVideos = asyncHandler(async (req, res, next) => {
+exports.getSocials = asyncHandler(async (req, res, next) => {
 	try {
-		const videos = await VideoSchema.find();
+		const socials = await SocialsSchema.find();
 
-		res.status(200).json({ data: videos });
+		res.status(200).json({ data: socials });
 	} catch (err) {
 		return next(new ErrorResponse(`Data not found`, 500));
 	}

@@ -1,7 +1,7 @@
 const express = require('express');
-const { getVideos } = require('./Video-Controller');
+const { getNavBars } = require('./NavBar-Controller');
 const router = express.Router();
 
-router.route('/').get(getVideos)
+router.route('/').get(getNavBars)
 
 module.exports = router;

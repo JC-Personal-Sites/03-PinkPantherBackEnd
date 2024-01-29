@@ -1,12 +1,12 @@
-const VideoSchema = require('./Video-Model');
+const NavBarSchema = require('./NavBar-Model');
 const ErrorResponse = require('../../utils/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
-exports.getVideos = asyncHandler(async (req, res, next) => {
+exports.getNavBars = asyncHandler(async (req, res, next) => {
 	try {
-		const videos = await VideoSchema.find();
+		const navBars = await NavBarSchema.find();
 
-		res.status(200).json({ data: videos });
+		res.status(200).json({ data: navBars });
 	} catch (err) {
 		return next(new ErrorResponse(`Data not found`, 500));
 	}

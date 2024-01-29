@@ -1,8 +1,7 @@
 const express = require('express');
-const { getPictures, getPicture, createPicture, updatePicture, deletePicture } = require('./Picture-Controller');
+const { getPictures } = require('./Picture-Controller');
 const router = express.Router();
 
-router.route('/').get(getPictures).post(createPicture);
-router.route('/:id').get(getPicture).put(updatePicture).delete(deletePicture);
+router.route('/').get(getPictures)
 
 module.exports = router;
