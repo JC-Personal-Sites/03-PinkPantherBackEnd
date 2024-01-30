@@ -1,5 +1,5 @@
 const NavBarSchema = require('./NavBar-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getNavBars = asyncHandler(async (req, res, next) => {

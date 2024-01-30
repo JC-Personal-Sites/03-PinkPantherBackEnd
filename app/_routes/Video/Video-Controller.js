@@ -1,5 +1,5 @@
 const VideoSchema = require('./Video-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getVideos = asyncHandler(async (req, res, next) => {

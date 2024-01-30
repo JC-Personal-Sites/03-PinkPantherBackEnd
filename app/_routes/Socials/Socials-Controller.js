@@ -1,5 +1,5 @@
 const SocialsSchema = require('./Socials-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getSocials = asyncHandler(async (req, res, next) => {
