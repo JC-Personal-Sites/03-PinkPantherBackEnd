@@ -1,7 +1,7 @@
+const dotenv = require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const colors = require('colors');
-const dotenv = require('dotenv');
 const errorHandler = require('./middleware/error'); // Express bespoke error handling
 const connectDB = require('./config/db');
 
@@ -13,8 +13,7 @@ const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors');
 // ============================================ \\
-
-dotenv.config({ path: './config/config.env' });
+console.log(process.env);
 const app = express();
 
 //dev - response check
