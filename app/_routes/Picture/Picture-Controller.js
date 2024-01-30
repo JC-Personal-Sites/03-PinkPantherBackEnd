@@ -1,5 +1,5 @@
 const PictureSchema = require('./Picture-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getPictures = asyncHandler(async (req, res, next) => {

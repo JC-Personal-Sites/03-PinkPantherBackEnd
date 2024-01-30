@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
-	const conn = await mongoose.connect(process.env.DEV_MONGO_URI, {
-		useUnifiedTopology: true,
-	});
+	mongoose.Promise = global.Promise;
+	
+	const conn = await mongoose.connect(process.env.MONGODB_URI, {});
 	
 	console.log(`MongoDB Conected ${conn.connection.name}`.cyan.underline.bold);
 };

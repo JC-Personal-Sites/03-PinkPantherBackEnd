@@ -11,5 +11,9 @@
 - Moved issues and jobs to GITHub issues
 _Challenge - Mongodb have changed they authencation process so had to fix_
 
+## 30-01-2024
+- moved the app to version 2 as implementing authenication, .env file and structure like used previously.
+- re-installed all dependancies to latest versions.
+
 ## outstanding jobs
 - Moved to GITHub Issues

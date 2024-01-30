@@ -1,5 +1,5 @@
 const AppendixSchema = require('./Appendix-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getAppendixs = asyncHandler(async (req, res, next) => {

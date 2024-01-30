@@ -1,6 +1,6 @@
 // Express midddleware to handle errors
 
-const ErrorResponse = require('../utils/errorResponse');
+const ErrorResponse = require('./errorResponse');
 
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };

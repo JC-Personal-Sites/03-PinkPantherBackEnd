@@ -1,5 +1,5 @@
 const UserSchema = require('./User-Model');
-const ErrorResponse = require('../../utils/errorResponse');
+const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
 exports.getUsers = asyncHandler(async (req, res, next) => {
