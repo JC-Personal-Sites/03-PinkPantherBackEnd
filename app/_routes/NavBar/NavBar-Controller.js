@@ -4,7 +4,7 @@ const asyncHandler = require('../../middleware/async');
 
 exports.getNavBars = asyncHandler(async (req, res, next) => {
 	try {
-		const navBars = await NavBarSchema.find();
+		const navBars = await NavBarSchema.find().sort({ 'id': 'asc' });
 
 		res.status(200).json({ data: navBars });
 	} catch (err) {
