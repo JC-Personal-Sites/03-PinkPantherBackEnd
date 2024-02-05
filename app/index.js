@@ -18,6 +18,7 @@ const cors = require('cors');
 
 // ========== Error Check .env =============== \\
 if (
+  !('WIKIPEDIA_API' in process.env) ||
   !('MONGODB_URI' in process.env) ||
   !('JWT_SECRET' in process.env) ||
   !('JWT_EXPIRYTIME' in process.env) ||
@@ -90,6 +91,7 @@ const pictureRoute = require('./_routes/Picture/Picture-Routes');
 const socialsRoute = require('./_routes/Socials/Socials-Routes');
 const videoRoute = require('./_routes/Video/Video-Routes');
 const userRoute = require('./_routes/Users/User-Routes');
+const wikipediaRoute = require('./_routes/Wikipedia/Wikipedia-Routes');
 // ================================================
 
 // ================================================
@@ -100,6 +102,7 @@ app.use('/picture', pictureRoute);
 app.use('/socials', socialsRoute);
 app.use('/video', videoRoute);
 app.use('/user', userRoute);
+app.use('/wikipedia', wikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'
