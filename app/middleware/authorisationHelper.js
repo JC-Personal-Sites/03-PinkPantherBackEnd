@@ -1,57 +1,44 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const asyncHandler = require('./async');
+const ErrorResponse = require('./errorResponse');
+const User = require('../_routes/User/User-Model');
 
-module.exports = {
-	UserIsInRole: (userRoles = []) => {
-		return (req, res, next) => {
-			if (!req.headers.authorization) {
-				return res.status(403).json({ message: 'No Authorization' });
-			}
-			const token = req.headers.authorization.split(' ')[1];
+// Protect routes
+exports.protect = asyncHandler(async (req, res, next) => {
+	let token;
 
-			if (!token) {
-				return res.status(403).json({ message: 'No token provided' });
-			}
-
-			try {
-				const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-				if (!decoded.roles.some(r => userRoles.includes(r.userRole))) {
-					// user's role is not authorized
-					return res.status(401).json({ message: 'Unauthorized' });
-				}
-
-				// role authorization successful
-				next();
-			} catch (ex) {
-				return res.status(500).json({ message: 'Token expired', token: null });
-			}
-		}
-	},
-	UserIsInType: (userTypes = []) => {
-		return (req, res, next) => {
-			if (!req.headers.authorization) {
-				return res.status(403).json({ message: 'No Authorization' });
-			}
-			const token = req.headers.authorization.split(' ')[1];
-
-			if (!token) {
-				return res.status(403).json({ message: 'No token provided' });
-			}
-
-			try {
-				const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-				if (!userTypes.includes(decoded.userType)) {
-					// user's type is not authorized
-					return res.status(401).json({ message: 'Unauthorized' });
-				}
-
-				// user type authorization successful
-				next();
-			} catch (ex) {
-				return res.status(500).json({ message: 'Token expired', token: null });
-			}
-		}
+	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+		// Set token from Bearer token in header
+		token = req.headers.authorization.split(' ')[1];
+		// Set token from cookie
 	}
+	// else if (req.cookies.token) {
+	//   token = req.cookies.token;
+	// }
+
+	// Make sure token exists
+	if (!token) {
+		return next(new ErrorResponse('Not authorized to access this route', 401));
+	}
+
+	try {
+		// Verify token
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+		req.user = await User.findById(decoded.id);
+
+		next();
+	} catch (err) {
+		return next(new ErrorResponse('Not authorized to access this route', 401));
+	}
+});
+
+// Grant access to specific roles
+exports.authorize = (...roles) => {
+	return (req, res, next) => {
+		if (!roles.includes(req.user.role)) {
+			return next(new ErrorResponse(`User role ${req.user.role} is not authorized to access this route`, 403));
+		}
+		next();
+	};
 };
