@@ -2,11 +2,12 @@
   "name": "PinkPanther-API",
   "version": "2.0.0",
   "description": "Create for my development of using API in my frontend Apps",
-  "main": "index.js",
+  "main": "app/index.js",
   "author": "justCoder - Justin Heath",
   "license": "ISC",
   "scripts": {
-    "start": "nodemon app/index.js"
+    "start": "nodemon app/index.js",
+    "serve": "node app/index.js"
   },
   "dependencies": {
     "axios": "^1.6.7",
