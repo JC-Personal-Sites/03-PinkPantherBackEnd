@@ -7,14 +7,14 @@ const errorHandler = require('./middleware/errorHandler'); // Express bespoke er
 const connectDB = require('./database');
 
 // ========== Addition Security =============== \\
-const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
-const xss = require('xss-clean');
+const mongoSanitize = require('express-mongo-sanitize'); 
+const helmet = require('helmet'); // HTTP Headers
+const xss = require('xss-clean'); // Cross Site Scripting - stop redirection to untrusted location
 const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
+const hpp = require('hpp'); // HTTP Parameter Pollution attacks
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors'); // Cross-Origin Resource Sharing - for commincating with web server - trusted routes
 
 // ========== Error Check .env =============== \\
 if (
