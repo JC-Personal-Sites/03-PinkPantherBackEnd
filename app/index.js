@@ -96,6 +96,7 @@ const wikipediaRoute = require('./_routes/Wikipedia/Wikipedia-Routes');
 
 // ================================================
 // Mount Routers
+app.use('/', (req, res) => res.json('Hi Justin How Are you?'));
 app.use('/appendix', appendixRoute);
 app.use('/navBar', navBarRoute);
 app.use('/picture', pictureRoute);
