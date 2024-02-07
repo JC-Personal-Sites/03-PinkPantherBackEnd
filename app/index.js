@@ -107,5 +107,5 @@ app.use('/wikipedia', wikipediaRoute);
 
 app.use(errorHandler); // Has to go after 'Mountings'
 
-const PORT = process.env.PORT || 3200;
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold));
