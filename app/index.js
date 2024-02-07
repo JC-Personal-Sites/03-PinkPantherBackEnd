@@ -84,8 +84,10 @@ app.use(cookieParser());
 // connect to DataBase
 connectDB();
 
+
 // ================================================
 // Setting Route File variables with there base URL
+const rootRoute = require('./_routes/_Root/Root-Routes');
 const appendixRoute = require('./_routes/Appendix/Appendix-Routes');
 const navBarRoute = require('./_routes/NavBar/NavBar-Routes');
 const pictureRoute = require('./_routes/Picture/Picture-Routes');
@@ -97,7 +99,7 @@ const wikipediaRoute = require('./_routes/Wikipedia/Wikipedia-Routes');
 
 // ================================================
 // Mount Routers
-app.use('/', (req, res) => res.json('Hi Justin How Are you?'));
+app.use('/', rootRoute);
 app.use('/appendix', appendixRoute);
 app.use('/navBar', navBarRoute);
 app.use('/picture', pictureRoute);
@@ -111,3 +113,4 @@ app.use(errorHandler); // Has to go after 'Mountings'
 
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold));
+
