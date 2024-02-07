@@ -1,4 +1,4 @@
-const VideoSchema = require('./Video-Model');
+const VideoSchema = require('./Videos-Model');
 const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 

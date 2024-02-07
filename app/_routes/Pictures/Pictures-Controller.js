@@ -1,4 +1,4 @@
-const PictureSchema = require('./Picture-Model');
+const PictureSchema = require('./Pictures-Model');
 const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 

@@ -1,4 +1,4 @@
-const UserSchema = require('./User-Model');
+const UserSchema = require('./Users-Model');
 const ErrorResponse = require('../../middleware/errorResponse');
 const asyncHandler = require('../../middleware/async');
 
