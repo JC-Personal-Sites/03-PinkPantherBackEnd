@@ -15,5 +15,8 @@ _Challenge - Mongodb have changed they authencation process so had to fix_
 - moved the app to version 2 as implementing authenication, .env file and structure like used previously.
 - re-installed all dependancies to latest versions.
 
+## 07-02-2024
+- renamed repo from 03-PinkPantherBackEnd to justCoder-Node-Server
+
 ## outstanding jobs
 - Moved to GITHub Issues
