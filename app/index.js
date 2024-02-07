@@ -92,7 +92,7 @@ const appendixRoute = require('./_routes/Appendix/Appendix-Routes');
 const navBarRoute = require('./_routes/NavBar/NavBar-Routes');
 const pictureRoute = require('./_routes/Pictures/Pictures-Routes');
 const socialsRoute = require('./_routes/Socials/Socials-Routes');
-const videoRoute = require('./_routes/Videos/Video-Routes');
+const videoRoute = require('./_routes/Videos/Videos-Routes');
 const userRoute = require('./_routes/Users/Users-Routes');
 const wikipediaRoute = require('./_routes/Wikipedia/Wikipedia-Routes');
 // ================================================
