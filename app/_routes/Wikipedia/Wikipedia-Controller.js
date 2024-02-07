@@ -11,8 +11,7 @@ exports.getAbout = asyncHandler(async (req, res, next) => {
 			subTitle: data.description,
   			contents: data.extract,
 		}
-		// REMOVE - This is just added to show suspense working
-		await new Promise(resolve => setTimeout(resolve, 1000))
+
 		res.status(200).json({ data: aboutData });
 	} catch (err) {
 		return next(new ErrorResponse(`Data not found`, 500));
@@ -56,8 +55,7 @@ exports.getHistory = asyncHandler(async (req, res, next) => {
 			title: 'History Page - WikiPedia API with destructure',
 			content: content
 		}
-		// REMOVE - This is just added to show suspense working
-		await new Promise(resolve => setTimeout(resolve, 1000))
+
 		res.status(200).json({ data: historyData });
 	} catch (err) {
 		return next(new ErrorResponse(`Data not found`, 500));

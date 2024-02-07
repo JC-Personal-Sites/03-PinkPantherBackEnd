@@ -5,8 +5,6 @@ const asyncHandler = require('../../middleware/async');
 exports.getPictures = asyncHandler(async (req, res, next) => {
   try {
     const pictures = await PictureSchema.find();
-    // REMOVE - This is just added to show suspense working
-    await new Promise((resolve) => setTimeout(resolve, 1000));
 	
     res.status(200).json({ data: pictures });
   } catch (err) {
