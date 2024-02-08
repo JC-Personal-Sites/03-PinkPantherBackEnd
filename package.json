@@ -1,5 +1,5 @@
 {
-  "name": "PinkPanther-API",
+  "name": "justCoder-Node-Server",
   "version": "2.0.0",
   "description": "Create for my development of using API in my frontend Apps",
   "main": "app/index.js",

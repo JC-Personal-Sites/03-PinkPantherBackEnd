@@ -18,6 +18,7 @@ _Challenge - Mongodb have changed they authencation process so had to fix_
 ## 07-02-2024
 - renamed repo from 03-PinkPantherBackEnd to justCoder-Node-Server
 - updated the git file references to new name
+- renamed the project too
 
 ## outstanding jobs
 - Moved to GITHub Issues
