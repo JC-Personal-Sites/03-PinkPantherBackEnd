@@ -1,7 +1,7 @@
-const ErrorResponse = require('../../middleware/errorResponse');
-const asyncHandler = require('../../middleware/async');
+import asyncHandler from '../../middleware/async';
+import ErrorResponse from '../../middleware/errorResponse';
 
-exports.getRoot = asyncHandler(async (req, res, next) => {
+export const getRoot = asyncHandler(async (req, res, next) => {
   try {
     res.status(200).json({ data: { hi: 'Hi Justin How Are you?' } });
   } catch (err) {

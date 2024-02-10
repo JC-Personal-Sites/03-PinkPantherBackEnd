@@ -1,7 +1,7 @@
-require('dotenv').config();
+import 'dotenv/config';
 require('colors');
 
-const express = require('express');
+import express from 'express';
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler'); // Express bespoke error handling
 const connectDB = require('./database');

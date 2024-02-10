@@ -1,5 +1,5 @@
-const express = require('express');
-const { getAppendixs, createAppendix, updateAppendix, deleteAppendix } = require('./Appendix-Controller');
+import express from 'express';
+import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from './Appendix-Controller';
 const router = express.Router();
 
 router.route('/').get(getAppendixs).post(createAppendix).put(updateAppendix).delete(deleteAppendix);

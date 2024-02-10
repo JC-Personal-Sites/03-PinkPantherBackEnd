@@ -5,6 +5,7 @@
   "main": "app/index.js",
   "author": "justCoder - Justin Heath",
   "license": "ISC",
+  "type": "module",
   "scripts": {
     "start": "node app/index.js",
     "dev": "nodemon app/index.js"

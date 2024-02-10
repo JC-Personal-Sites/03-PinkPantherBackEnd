@@ -1,8 +1,8 @@
-const AppendixSchema = require('./Appendix-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from '../../../middleware/async';
+import ErrorResponse from '../../../middleware/errorResponse';
+import { AppendixSchema } from './Appendix-Model';
 
-exports.getAppendixs = asyncHandler(async (req, res, next) => {
+export const getAppendixs = asyncHandler(async (req, res, next) => {
   try {
     const appendixs = await AppendixSchema.find().sort({ id: 'asc' });
 
@@ -12,7 +12,7 @@ exports.getAppendixs = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.createAppendix = asyncHandler(async (req, res, next) => {
+export const createAppendix = asyncHandler(async (req, res, next) => {
   try {
     await AppendixSchema.create(req.body);
     res.status(201).json({ success: true });
@@ -21,7 +21,7 @@ exports.createAppendix = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.updateAppendix = asyncHandler(async (req, res, next) => {
+export const updateAppendix = asyncHandler(async (req, res, next) => {
   try {
     await AppendixSchema.findByIdAndUpdate(req.body._id, req.body, { new: true, runValidators: true });
     res.status(201).json({ success: true });
@@ -30,7 +30,7 @@ exports.updateAppendix = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.deleteAppendix = asyncHandler(async (req, res, next) => {
+export const deleteAppendix = asyncHandler(async (req, res, next) => {
   try {
     await AppendixSchema.deleteOne({ _id: req.query.id });
     res.status(201).json({ success: true });
@@ -38,3 +38,5 @@ exports.deleteAppendix = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found with id of ${req.query.id}`, 404));
   }
 });
+
+export default getAppendixs;

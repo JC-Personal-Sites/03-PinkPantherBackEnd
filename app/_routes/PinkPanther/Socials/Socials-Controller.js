@@ -1,8 +1,8 @@
-const SocialsSchema = require('./Socials-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from '../../../middleware/async';
+import ErrorResponse from '../../../middleware/errorResponse';
+import SocialsSchema from './Socials-Model';
 
-exports.getSocials = asyncHandler(async (req, res, next) => {
+export const getSocials = asyncHandler(async (req, res, next) => {
   try {
     const socials = await SocialsSchema.find();
 

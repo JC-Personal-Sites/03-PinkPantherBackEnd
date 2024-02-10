@@ -1,8 +1,8 @@
-const PictureSchema = require('./Pictures-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from '../../../middleware/async';
+import ErrorResponse from '../../../middleware/errorResponse';
+import PictureSchema from './Pictures-Model';
 
-exports.getPictures = asyncHandler(async (req, res, next) => {
+export const getPictures = asyncHandler(async (req, res, next) => {
   try {
     const pictures = await PictureSchema.find();
 
@@ -12,7 +12,7 @@ exports.getPictures = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.getPicture = asyncHandler(async (req, res, next) => {
+export const getPicture = asyncHandler(async (req, res, next) => {
   const Picture = await PictureModel.findById(req.params.id);
 
   if (!Picture) {
@@ -22,13 +22,13 @@ exports.getPicture = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: Picture });
 });
 
-exports.createPicture = asyncHandler(async (req, res, next) => {
+export const createPicture = asyncHandler(async (req, res, next) => {
   const createPicture = await PictureModel.create(req.body);
 
   res.status(201).json({ success: true, data: createPicture });
 });
 
-exports.updatePicture = asyncHandler(async (req, res, next) => {
+export const updatePicture = asyncHandler(async (req, res, next) => {
   let updatePicture = await PictureModel.findById(req.params.id);
 
   if (!updatePicture) {
@@ -42,7 +42,7 @@ exports.updatePicture = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: updatePicture });
 });
 
-exports.deletePicture = asyncHandler(async (req, res, next) => {
+export const deletePicture = asyncHandler(async (req, res, next) => {
   let deletePicture = await PictureModel.findById(req.params.id);
 
   if (!deletePicture) {
@@ -52,3 +52,5 @@ exports.deletePicture = asyncHandler(async (req, res, next) => {
   deletePicture.remove();
   res.status(200).json({ success: true, data: {} });
 });
+
+export default getPicture;

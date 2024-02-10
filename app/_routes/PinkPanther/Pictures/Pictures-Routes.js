@@ -1,7 +1,7 @@
-const express = require('express');
-const { getPictures } = require('./Pictures-Controller');
+import express from 'express';
+import { getPictures } from './Pictures-Controller';
 const router = express.Router();
 
-router.route('/').get(getPictures)
+router.route('/').get(getPictures);
 
 module.exports = router;

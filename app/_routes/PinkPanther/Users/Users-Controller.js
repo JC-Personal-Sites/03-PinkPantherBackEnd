@@ -1,8 +1,8 @@
-const UserSchema = require('./Users-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from '../../../middleware/async';
+import ErrorResponse from '../../../middleware/errorResponse';
+import UserSchema from './Users-Model';
 
-exports.getUsers = asyncHandler(async (req, res, next) => {
+export const getUsers = asyncHandler(async (req, res, next) => {
   try {
     const users = await UserSchema.find();
 
@@ -12,7 +12,7 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.getUser = asyncHandler(async (req, res, next) => {
+export const getUser = asyncHandler(async (req, res, next) => {
   const User = await UserModel.findById(req.params.id);
 
   if (!User) {
@@ -22,13 +22,13 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: User });
 });
 
-exports.createUser = asyncHandler(async (req, res, next) => {
+export const createUser = asyncHandler(async (req, res, next) => {
   const createUser = await UserModel.create(req.body);
 
   res.status(201).json({ success: true, data: createUser });
 });
 
-exports.updateUser = asyncHandler(async (req, res, next) => {
+export const updateUser = asyncHandler(async (req, res, next) => {
   let updateUser = await UserModel.findById(req.params.id);
 
   if (!updateUser) {
@@ -42,7 +42,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: updateUser });
 });
 
-exports.deleteUser = asyncHandler(async (req, res, next) => {
+export const deleteUser = asyncHandler(async (req, res, next) => {
   let deleteUser = await UserModel.findById(req.params.id);
 
   if (!deleteUser) {
@@ -52,3 +52,5 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
   deleteUser.remove();
   res.status(200).json({ success: true, data: {} });
 });
+
+export default getUsers;

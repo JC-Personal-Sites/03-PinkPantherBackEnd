@@ -1,8 +1,8 @@
-const NavBarSchema = require('./NavBar-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from '../../../middleware/async';
+import ErrorResponse from '../../../middleware/errorResponse';
+import NavBarSchema from './NavBar-Model';
 
-exports.getNavBars = asyncHandler(async (req, res, next) => {
+export const getNavBars = asyncHandler(async (req, res, next) => {
   try {
     const navBars = await NavBarSchema.find().sort({ id: 'asc' });
 
@@ -11,3 +11,5 @@ exports.getNavBars = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found`, 500));
   }
 });
+
+export default getNavBars;
