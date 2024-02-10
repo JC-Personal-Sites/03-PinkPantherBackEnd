@@ -7,7 +7,7 @@ const errorHandler = require('./middleware/errorHandler'); // Express bespoke er
 const connectDB = require('./database');
 
 // ========== Addition Security =============== \\
-const mongoSanitize = require('express-mongo-sanitize'); 
+const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet'); // HTTP Headers
 const xss = require('xss-clean'); // Cross Site Scripting - stop redirection to untrusted location
 const rateLimit = require('express-rate-limit');
@@ -74,9 +74,9 @@ app.disable('x-powered-by');
 // Body Parser
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(
-	bodyParser.urlencoded({
-		extended: true,
-	})
+  bodyParser.urlencoded({
+    extended: true,
+  })
 );
 
 app.use(cookieParser());
@@ -84,33 +84,32 @@ app.use(cookieParser());
 // connect to DataBase
 connectDB();
 
-
 // ================================================
 // Setting Route File variables with there base URL
 const rootRoute = require('./_routes/_Root/Root-Routes');
-const appendixRoute = require('./_routes/Appendix/Appendix-Routes');
-const navBarRoute = require('./_routes/NavBar/NavBar-Routes');
-const pictureRoute = require('./_routes/Pictures/Pictures-Routes');
-const socialsRoute = require('./_routes/Socials/Socials-Routes');
-const videoRoute = require('./_routes/Videos/Videos-Routes');
-const userRoute = require('./_routes/Users/Users-Routes');
-const wikipediaRoute = require('./_routes/Wikipedia/Wikipedia-Routes');
+// PinkPanther
+const appendixRoute = require('./_routes/PinkPanther/Appendix/Appendix-Routes');
+const navBarRoute = require('./_routes/PinkPanther/NavBar/NavBar-Routes');
+const pictureRoute = require('./_routes/PinkPanther/Pictures/Pictures-Routes');
+const socialsRoute = require('./_routes/PinkPanther/Socials/Socials-Routes');
+const videoRoute = require('./_routes/PinkPanther/Videos/Videos-Routes');
+const userRoute = require('./_routes/PinkPanther/Users/Users-Routes');
+const wikipediaRoute = require('./_routes/PinkPanther/Wikipedia/Wikipedia-Routes');
 // ================================================
 
 // ================================================
 // Mount Routers
 app.use('/', rootRoute);
-app.use('/appendix', appendixRoute);
-app.use('/navBar', navBarRoute);
-app.use('/pictures', pictureRoute);
-app.use('/socials', socialsRoute);
-app.use('/videos', videoRoute);
-app.use('/users', userRoute);
-app.use('/wikipedia', wikipediaRoute);
+app.use('/pinkpanther/appendix', appendixRoute);
+app.use('/pinkpanther/navBar', navBarRoute);
+app.use('/pinkpanther/pictures', pictureRoute);
+app.use('/pinkpanther/socials', socialsRoute);
+app.use('/pinkpanther/videos', videoRoute);
+app.use('/pinkpanther/users', userRoute);
+app.use('/pinkpanther/wikipedia', wikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'
 
 const PORT = process.env.PORT || 8080;
 server.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold));
-

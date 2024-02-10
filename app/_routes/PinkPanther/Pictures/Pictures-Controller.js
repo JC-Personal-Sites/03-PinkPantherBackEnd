@@ -1,11 +1,11 @@
 const PictureSchema = require('./Pictures-Model');
-const ErrorResponse = require('../../middleware/errorResponse');
-const asyncHandler = require('../../middleware/async');
+const ErrorResponse = require('../../../middleware/errorResponse');
+const asyncHandler = require('../../../middleware/async');
 
 exports.getPictures = asyncHandler(async (req, res, next) => {
   try {
     const pictures = await PictureSchema.find();
-	
+
     res.status(200).json({ data: pictures });
   } catch (err) {
     return next(new ErrorResponse(`Data not found`, 500));
