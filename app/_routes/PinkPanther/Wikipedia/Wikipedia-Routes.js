@@ -1,9 +1,6 @@
 import express from 'express';
-import { getAbout, getHistory } from './Wikipedia-Controller';
-const router = express.Router();
+import { getAbout, getHistory } from './Wikipedia-Controller.js';
 
-router.route('/about').get(getAbout);
+export const wikipediaRoute = express.Router().get('/about', getAbout).get('/history', getHistory);
 
-router.route('/history').get(getHistory);
-
-module.exports = router;
+export default wikipediaRoute;

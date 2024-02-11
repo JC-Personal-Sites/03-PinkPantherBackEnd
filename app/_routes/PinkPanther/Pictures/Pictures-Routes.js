@@ -1,7 +1,6 @@
 import express from 'express';
-import { getPictures } from './Pictures-Controller';
-const router = express.Router();
+import getPictures from './Pictures-Controller.js';
 
-router.route('/').get(getPictures);
+export const pictureRoute = express.Router().get('/', getPictures);
 
-module.exports = router;
+export default pictureRoute;

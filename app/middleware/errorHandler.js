@@ -1,8 +1,7 @@
 // Express midddleware to handle errors
+import ErrorResponse from './errorResponse.js';
 
-import ErrorResponse from './errorResponse';
-
-export const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   let error = { ...err };
 
   error.message = err.message;

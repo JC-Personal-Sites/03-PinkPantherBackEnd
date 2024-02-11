@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const connectDB = async () => {
+const connectDB = async () => {
   mongoose.Promise = global.Promise;
 
   const conn = await mongoose.connect(process.env.MONGODB_URI, {});

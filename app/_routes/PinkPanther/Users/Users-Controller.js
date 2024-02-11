@@ -1,6 +1,6 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import UserSchema from './Users-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import UserSchema from './Users-Model.js';
 
 export const getUsers = asyncHandler(async (req, res, next) => {
   try {

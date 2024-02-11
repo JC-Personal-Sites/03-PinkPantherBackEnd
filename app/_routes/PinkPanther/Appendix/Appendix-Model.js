@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const AppendixSchema = new mongoose.Schema(
+const AppendixSchema = new mongoose.Schema(
   {
     id: { type: Number },
     reference: { type: String, required: [true, 'Required'] },
@@ -14,4 +14,4 @@ export const AppendixSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpantherappendixs', AppendixSchema);
+export default mongoose.model('Pinkpantherappendixs', AppendixSchema);

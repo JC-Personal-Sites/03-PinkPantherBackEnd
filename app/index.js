@@ -1,20 +1,22 @@
+import 'colors';
 import 'dotenv/config';
-require('colors');
-
 import express from 'express';
-const morgan = require('morgan');
-const errorHandler = require('./middleware/errorHandler'); // Express bespoke error handling
-const connectDB = require('./database');
+import morgan from 'morgan';
+import connectDB from './_mongoDB.js';
+// import { navBarRoute, rootRoute } from './_routes/index.js';
+import { rootRoute } from './_routes/_Root/Root-Routes.js';
+import { navBarRoute } from './_routes/PinkPanther/NavBar/NavBar-Routes.js';
+import errorHandler from './middleware/errorHandler.js'; // Express bespoke error handling
 
 // ========== Addition Security =============== \\
-const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet'); // HTTP Headers
-const xss = require('xss-clean'); // Cross Site Scripting - stop redirection to untrusted location
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp'); // HTTP Parameter Pollution attacks
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const cors = require('cors'); // Cross-Origin Resource Sharing - for commincating with web server - trusted routes
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import cors from 'cors'; // Cross-Origin Resource Sharing - for commincating with web server - trusted routes i.e. http://localhost:3000
+import mongoSanitize from 'express-mongo-sanitize';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet'; // HTTP Headers
+import hpp from 'hpp'; // HTTP Parameter Pollution attacks
+import xss from 'xss-clean'; // Cross Site Scripting - stop redirection to untrusted location
 
 // ========== Error Check .env =============== \\
 if (
@@ -33,7 +35,7 @@ if (
 // ============================================ \\
 
 const app = express();
-const server = require('http').createServer(app);
+app.use(hpp());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -85,31 +87,18 @@ app.use(cookieParser());
 connectDB();
 
 // ================================================
-// Setting Route File variables with there base URL
-const rootRoute = require('./_routes/_Root/Root-Routes');
-// PinkPanther
-const appendixRoute = require('./_routes/PinkPanther/Appendix/Appendix-Routes');
-const navBarRoute = require('./_routes/PinkPanther/NavBar/NavBar-Routes');
-const pictureRoute = require('./_routes/PinkPanther/Pictures/Pictures-Routes');
-const socialsRoute = require('./_routes/PinkPanther/Socials/Socials-Routes');
-const videoRoute = require('./_routes/PinkPanther/Videos/Videos-Routes');
-const userRoute = require('./_routes/PinkPanther/Users/Users-Routes');
-const wikipediaRoute = require('./_routes/PinkPanther/Wikipedia/Wikipedia-Routes');
-// ================================================
-
-// ================================================
 // Mount Routers
 app.use('/', rootRoute);
-app.use('/pinkpanther/appendix', appendixRoute);
+// app.use('/pinkpanther/appendix', appendixRoute);
 app.use('/pinkpanther/navBar', navBarRoute);
-app.use('/pinkpanther/pictures', pictureRoute);
-app.use('/pinkpanther/socials', socialsRoute);
-app.use('/pinkpanther/videos', videoRoute);
-app.use('/pinkpanther/users', userRoute);
-app.use('/pinkpanther/wikipedia', wikipediaRoute);
+// app.use('/pinkpanther/pictures', pictureRoute);
+// app.use('/pinkpanther/socials', socialsRoute);
+// app.use('/pinkpanther/videos', videoRoute);
+// app.use('/pinkpanther/users', userRoute);
+// app.use('/pinkpanther/wikipedia', wikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'
 
 const PORT = process.env.PORT || 8080;
-server.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold));
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold));

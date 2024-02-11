@@ -1,7 +1,6 @@
 import express from 'express';
-import { getNavBars } from './NavBar-Controller';
-const router = express.Router();
+import getNavBars from './NavBar-Controller.js';
 
-router.route('/').get(getNavBars);
+export const navBarRoute = express.Router().get('/', getNavBars);
 
-module.exports = router;
+export default navBarRoute;

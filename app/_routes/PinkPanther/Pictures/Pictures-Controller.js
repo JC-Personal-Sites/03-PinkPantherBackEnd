@@ -1,8 +1,8 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import PictureSchema from './Pictures-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import PictureSchema from './Pictures-Model.js';
 
-export const getPictures = asyncHandler(async (req, res, next) => {
+const getPictures = asyncHandler(async (req, res, next) => {
   try {
     const pictures = await PictureSchema.find();
 
@@ -12,45 +12,4 @@ export const getPictures = asyncHandler(async (req, res, next) => {
   }
 });
 
-export const getPicture = asyncHandler(async (req, res, next) => {
-  const Picture = await PictureModel.findById(req.params.id);
-
-  if (!Picture) {
-    return next(new ErrorResponse(`Data not found with id of ${req.params.id}`, 404));
-  }
-
-  res.status(200).json({ success: true, data: Picture });
-});
-
-export const createPicture = asyncHandler(async (req, res, next) => {
-  const createPicture = await PictureModel.create(req.body);
-
-  res.status(201).json({ success: true, data: createPicture });
-});
-
-export const updatePicture = asyncHandler(async (req, res, next) => {
-  let updatePicture = await PictureModel.findById(req.params.id);
-
-  if (!updatePicture) {
-    return next(new ErrorResponse(`Data not found with id of ${req.params.id}`, 404));
-  }
-
-  updatePicture = await PictureModel.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  res.status(200).json({ success: true, data: updatePicture });
-});
-
-export const deletePicture = asyncHandler(async (req, res, next) => {
-  let deletePicture = await PictureModel.findById(req.params.id);
-
-  if (!deletePicture) {
-    return next(new ErrorResponse(`Data not found with id of ${req.params.id}`, 404));
-  }
-
-  deletePicture.remove();
-  res.status(200).json({ success: true, data: {} });
-});
-
-export default getPicture;
+export default getPictures;

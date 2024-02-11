@@ -1,8 +1,7 @@
 import Crypto from 'crypto';
 import datefns from 'date-fns';
 import nodeMailer from 'nodemailer';
-
-import UserSchema from '../Models/users';
+import UserSchema from '../Users/Users-Model.js';
 
 class RestorePasswordService {
   async newPasswordForExistingUser(data, type) {

@@ -1,8 +1,8 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import VideoSchema from './Videos-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import VideoSchema from './Videos-Model.js';
 
-export const getVideos = asyncHandler(async (req, res, next) => {
+const getVideos = asyncHandler(async (req, res, next) => {
   try {
     const videos = await VideoSchema.find();
 

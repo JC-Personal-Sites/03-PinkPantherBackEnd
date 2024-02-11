@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const PictureSchema = new mongoose.Schema(
+const PictureSchema = new mongoose.Schema(
   {
     title: { type: String, required: [true, 'Required'] },
     url: { type: String, required: [true, 'Required'] },
@@ -13,4 +13,4 @@ export const PictureSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpantherpictures', PictureSchema);
+export default mongoose.model('Pinkpantherpictures', PictureSchema);

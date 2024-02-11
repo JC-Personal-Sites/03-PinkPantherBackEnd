@@ -1,7 +1,6 @@
 import express from 'express';
-import { getVideos } from './Videos-Controller';
-const router = express.Router();
+import getVideos from './Videos-Controller.js';
 
-router.route('/').get(getVideos);
+export const videoRoute = express.Router().get('/', getVideos);
 
-module.exports = router;
+export default videoRoute;

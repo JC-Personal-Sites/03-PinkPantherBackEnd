@@ -1,8 +1,8 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import NavBarSchema from './NavBar-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import NavBarSchema from './NavBar-Model.js';
 
-export const getNavBars = asyncHandler(async (req, res, next) => {
+const getNavBars = asyncHandler(async (req, res, next) => {
   try {
     const navBars = await NavBarSchema.find().sort({ id: 'asc' });
 

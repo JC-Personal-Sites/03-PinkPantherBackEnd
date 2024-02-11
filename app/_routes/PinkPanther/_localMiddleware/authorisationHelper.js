@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import User from '../_routes/User/User-Model';
-import asyncHandler from './async';
-import ErrorResponse from './errorResponse';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import UserSchema from '../Users/Users-Model.js';
 
 // Protect routes
 export const protect = asyncHandler(async (req, res, next) => {
@@ -25,7 +25,7 @@ export const protect = asyncHandler(async (req, res, next) => {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = await User.findById(decoded.id);
+    req.user = await UserSchema.findById(decoded.id);
 
     next();
   } catch (err) {

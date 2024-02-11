@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const UserSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     firstName: { type: String },
     lastName: { type: String },
@@ -14,4 +14,4 @@ export const UserSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpantherusers', UserSchema);
+export default mongoose.model('Pinkpantherusers', UserSchema);

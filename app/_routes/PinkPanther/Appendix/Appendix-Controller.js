@@ -1,6 +1,6 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import { AppendixSchema } from './Appendix-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import AppendixSchema from './Appendix-Model.js';
 
 export const getAppendixs = asyncHandler(async (req, res, next) => {
   try {
@@ -38,5 +38,3 @@ export const deleteAppendix = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found with id of ${req.query.id}`, 404));
   }
 });
-
-export default getAppendixs;

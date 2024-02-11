@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const SocialsSchema = new mongoose.Schema(
+const SocialsSchema = new mongoose.Schema(
   {
     id: { type: Number },
     social: { type: String },
@@ -12,4 +12,4 @@ export const SocialsSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpanthersocials', SocialsSchema);
+export default mongoose.model('Pinkpanthersocials', SocialsSchema);

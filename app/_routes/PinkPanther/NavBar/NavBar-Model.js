@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const NavBarSchema = new mongoose.Schema(
+const NavBarSchema = new mongoose.Schema(
   {
     id: { type: Number },
     title: { type: String, required: [true, 'Required'] },
@@ -11,4 +11,4 @@ export const NavBarSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpanthernavbars', NavBarSchema);
+export default mongoose.model('Pinkpanthernavbars', NavBarSchema);

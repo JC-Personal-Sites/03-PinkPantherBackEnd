@@ -1,8 +1,8 @@
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
-import SocialsSchema from './Socials-Model';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import SocialsSchema from './Socials-Model.js';
 
-export const getSocials = asyncHandler(async (req, res, next) => {
+const getSocials = asyncHandler(async (req, res, next) => {
   try {
     const socials = await SocialsSchema.find();
 
@@ -11,3 +11,5 @@ export const getSocials = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found`, 500));
   }
 });
+
+export default getSocials;

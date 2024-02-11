@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export const VideoSchema = new mongoose.Schema(
+const VideoSchema = new mongoose.Schema(
   {
     title: { type: String, required: [true, 'Required'] },
     url: { type: String, required: [true, 'Required'] },
@@ -14,4 +14,4 @@ export const VideoSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Pinkpanthervideos', VideoSchema);
+export default mongoose.model('Pinkpanthervideos', VideoSchema);

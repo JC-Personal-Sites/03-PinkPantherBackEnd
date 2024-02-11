@@ -2,7 +2,7 @@ import Crypto from 'crypto';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
-export const VerifyToken = async (req, res, next) => {
+const VerifyToken = async (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(403).json({ message: 'No Authorization' });
   }

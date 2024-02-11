@@ -1,6 +1,6 @@
 import axios from 'axios';
-import asyncHandler from '../../../middleware/async';
-import ErrorResponse from '../../../middleware/errorResponse';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
 
 export const getAbout = asyncHandler(async (req, res, next) => {
