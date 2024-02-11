@@ -1,7 +1,6 @@
-const express = require('express');
-const { getSocials } = require('./Socials-Controller');
-const router = express.Router();
+import express from 'express';
+import getSocials from './Socials-Controller.js';
 
-router.route('/').get(getSocials)
+const socialsRoute = express.Router().get('/', getSocials);
 
-module.exports = router;
+export default socialsRoute;

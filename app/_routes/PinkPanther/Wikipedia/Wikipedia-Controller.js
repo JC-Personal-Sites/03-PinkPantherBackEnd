@@ -1,9 +1,9 @@
-const axios = require('axios');
+import axios from 'axios';
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
 
-exports.getAbout = asyncHandler(async (req, res, next) => {
+export const getAbout = asyncHandler(async (req, res, next) => {
   try {
     const data = await api.get('/page/summary/Pink_Panther_(character)').then((res) => res.data);
     const aboutData = {
@@ -18,7 +18,7 @@ exports.getAbout = asyncHandler(async (req, res, next) => {
   }
 });
 
-exports.getHistory = asyncHandler(async (req, res, next) => {
+export const getHistory = asyncHandler(async (req, res, next) => {
   try {
     // By passing in the revission this will keep the response stable
     const data = await api.get('/page/talk/Pink_Panther_(character)/1196918442').then((res) => res.data);
@@ -67,3 +67,5 @@ exports.getHistory = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found`, 500));
   }
 });
+
+export default getAbout;

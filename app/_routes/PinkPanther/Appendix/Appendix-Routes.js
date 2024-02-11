@@ -1,11 +1,14 @@
-const express = require('express');
-const { getAppendixs, createAppendix, updateAppendix, deleteAppendix } = require('./Appendix-Controller');
-const router = express.Router();
+import express from 'express';
+import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from './Appendix-Controller.js';
 
-router.route('/').get(getAppendixs).post(createAppendix).put(updateAppendix).delete(deleteAppendix);
+const appendixRoute = express
+  .Router()
+  .get('/', getAppendixs)
+  .post('/', createAppendix)
+  .put('/', updateAppendix)
+  .delete('/', deleteAppendix);
 
-module.exports = router;
-
+export default appendixRoute;
 // This is linked to JWT and auth user can only make changes
 // The auth is to determine which roles can do what.
 // const { protect, authorize } = require('../../middleware/authorisationHelper');

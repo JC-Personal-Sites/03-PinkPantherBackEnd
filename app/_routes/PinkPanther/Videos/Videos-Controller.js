@@ -1,8 +1,8 @@
-const VideoSchema = require('./Videos-Model');
-const ErrorResponse = require('../../../middleware/errorResponse');
-const asyncHandler = require('../../../middleware/async');
+import asyncHandler from 'express-async-handler';
+import ErrorResponse from '../../../middleware/errorResponse.js';
+import VideoSchema from './Videos-Model.js';
 
-exports.getVideos = asyncHandler(async (req, res, next) => {
+const getVideos = asyncHandler(async (req, res, next) => {
   try {
     const videos = await VideoSchema.find();
 
@@ -11,3 +11,5 @@ exports.getVideos = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Data not found`, 500));
   }
 });
+
+export default getVideos;
