@@ -3,10 +3,18 @@ import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
 import connectDB from './_mongoDB.js';
-// import { navBarRoute, rootRoute } from './_routes/index.js';
-import { rootRoute } from './_routes/_Root/Root-Routes.js';
-import { navBarRoute } from './_routes/PinkPanther/NavBar/NavBar-Routes.js';
 import errorHandler from './middleware/errorHandler.js'; // Express bespoke error handling
+
+// ---- Routes ----------------------------------
+import appendixRoute from './_routes/PinkPanther/Appendix/Appendix-Routes.js';
+import navBarRoute from './_routes/PinkPanther/NavBar/NavBar-Routes.js';
+import rootRoute from './_routes/_Root/Root-Routes.js';
+import pictureRoute from './_routes/PinkPanther/Pictures/Pictures-Routes.js';
+import socialsRoute from './_routes/PinkPanther/Socials/Socials-Routes.js';
+import userRoute from './_routes/PinkPanther/Users/Users-Routes.js';
+import videoRoute from './_routes/PinkPanther/Videos/Videos-Routes.js';
+import wikipediaRoute from './_routes/PinkPanther/Wikipedia/Wikipedia-Routes.js';
+// -----------------------------------------------
 
 // ========== Addition Security =============== \\
 import bodyParser from 'body-parser';
@@ -89,13 +97,13 @@ connectDB();
 // ================================================
 // Mount Routers
 app.use('/', rootRoute);
-// app.use('/pinkpanther/appendix', appendixRoute);
+app.use('/pinkpanther/appendix', appendixRoute);
 app.use('/pinkpanther/navBar', navBarRoute);
-// app.use('/pinkpanther/pictures', pictureRoute);
-// app.use('/pinkpanther/socials', socialsRoute);
-// app.use('/pinkpanther/videos', videoRoute);
-// app.use('/pinkpanther/users', userRoute);
-// app.use('/pinkpanther/wikipedia', wikipediaRoute);
+app.use('/pinkpanther/pictures', pictureRoute);
+app.use('/pinkpanther/socials', socialsRoute);
+app.use('/pinkpanther/videos', videoRoute);
+app.use('/pinkpanther/users', userRoute);
+app.use('/pinkpanther/wikipedia', wikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'

@@ -1,7 +1,7 @@
 import express from 'express';
 import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from './Appendix-Controller.js';
 
-export const appendixRoute = express
+const appendixRoute = express
   .Router()
   .get('/', getAppendixs)
   .post('/', createAppendix)

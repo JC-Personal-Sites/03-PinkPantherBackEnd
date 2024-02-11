@@ -1,7 +1,7 @@
 import express from 'express';
 import { createUser, deleteUser, getUser, getUsers, updateUser } from './Users-Controller.js';
 
-export const userRoute = express
+const userRoute = express
   .Router()
   .get('/', getUsers)
   .post('/', createUser)
