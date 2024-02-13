@@ -1,15 +1,14 @@
-import jwt from 'jsonwebtoken';
-import asyncHandler from 'express-async-handler';
-import ErrorResponse from '../../../middleware/errorResponse.js';
-import UserSchema from '../Users/Users-Model.js';
+import asyncHandler from "express-async-handler";
+import jwt from "jsonwebtoken";
+import UserSchema from "../Users/Users-Model";
 
 // Protect routes
 export const protect = asyncHandler(async (req, res, next) => {
   let token;
 
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     // Set token from Bearer token in header
-    token = req.headers.authorization.split(' ')[1];
+    token = req.headers.authorization.split(" ")[1];
     // Set token from cookie
   }
   // else if (req.cookies.token) {
@@ -18,7 +17,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 
   // Make sure token exists
   if (!token) {
-    return next(new ErrorResponse('Not authorized to access this route', 401));
+    return next(res.status(401).json({ error: "Not authorized to access this route" }));
   }
 
   try {
@@ -29,7 +28,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 
     next();
   } catch (err) {
-    return next(new ErrorResponse('Not authorized to access this route', 401));
+    return next(res.status(401).json({ error: "Not authorized to access this route" }));
   }
 });
 
@@ -37,7 +36,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 export const authorize = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return next(new ErrorResponse(`User role ${req.user.role} is not authorized to access this route`, 403));
+      return next(res.status(403).json({ error: `User role ${req.user.role} is not authorized to access this route` }));
     }
     next();
   };

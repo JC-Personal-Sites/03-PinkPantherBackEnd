@@ -1,12 +1,12 @@
-import express from 'express';
-import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from './Appendix-Controller.js';
+import express from "express";
+import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from "./Appendix-Controller";
 
 const appendixRoute = express
   .Router()
-  .get('/', getAppendixs)
-  .post('/', createAppendix)
-  .put('/', updateAppendix)
-  .delete('/', deleteAppendix);
+  .get("/", getAppendixs)
+  .post("/", createAppendix)
+  .put("/", updateAppendix)
+  .delete("/", deleteAppendix);
 
 export default appendixRoute;
 // This is linked to JWT and auth user can only make changes
