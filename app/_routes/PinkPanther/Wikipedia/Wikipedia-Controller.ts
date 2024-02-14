@@ -2,18 +2,18 @@ import axios from "axios";
 import asyncHandler from "express-async-handler";
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
 
-interface TFinalChunk {
+type TFinalChunk = {
   type: "html" | "string";
   value: string;
-}
+};
 
-interface TContent {
+type TContent = {
   title: string;
   data: {
     columns: string[];
-    rows: TFinalChunk[];
+    rows: [TFinalChunk[]];
   };
-}
+};
 
 export const getAbout = asyncHandler(async (req, res, next) => {
   try {
@@ -36,7 +36,7 @@ export const getHistory = asyncHandler(async (req, res, next) => {
     const data = await api.get("/page/talk/Pink_Panther_(character)/1196918442").then((res) => res.data);
 
     // ---- workings needed to delimite text string from Wikipedia ---- \\
-    const content: TContent = { title: "", data: { columns: [], rows: [] } };
+    const content: TContent = { title: "", data: { columns: [], rows: [[]] } };
     const hData = data.topics[11];
     content.title = hData.html;
     content.data.columns = hData.replies[0].html.split("<br>").filter((n: string, i: number) => n && i < 6);
@@ -54,9 +54,10 @@ export const getHistory = asyncHandler(async (req, res, next) => {
       }
 
       // refactor for global table rows
+      const finalChunk: TFinalChunk[] = [];
       chunk.forEach((c: string, i: number) => {
         // Workings for links in data to work working when rendered
-        content.data.rows.push({
+        finalChunk.push({
           type: `${i === 1 || i === 3 ? "html" : "string"}`,
           value:
             i === 1 || i === 3
@@ -64,7 +65,11 @@ export const getHistory = asyncHandler(async (req, res, next) => {
               : c,
         });
       });
+
+      content.data.rows.push(finalChunk);
     }
+
+    content.data.rows.shift();
 
     const historyData = {
       title: "History Page - WikiPedia API with destructure",

@@ -24,7 +24,6 @@ import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet"; // HTTP Headers
 import hpp from "hpp"; // HTTP Parameter Pollution attacks
-import xss from "xss-clean"; // Cross Site Scripting - stop redirection to untrusted location
 
 // ========== Error Check .env =============== \\
 if (
@@ -55,9 +54,6 @@ app.use(mongoSanitize());
 
 // Set security headers
 app.use(helmet());
-
-// Prevent XSS attacks
-app.use(xss());
 
 // Rate limiting
 const limiter = rateLimit({
