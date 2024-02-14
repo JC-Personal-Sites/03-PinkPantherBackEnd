@@ -38,6 +38,6 @@
   <r>BE - Merged issue 10 into main - ES6 Modules/r>
   <c>This was challenge to make sure all was working</c>
 
-## outstanding jobs
+## 13-02-2024
 
-- Moved to GITHub Issues
+- Add Typescript to project
