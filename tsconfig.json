@@ -8,6 +8,7 @@
     "strict": false,
     "skipLibCheck": true,
     "noImplicitAny": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "strictNullChecks": true
   }
 }

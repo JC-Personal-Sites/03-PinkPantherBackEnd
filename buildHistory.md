@@ -35,9 +35,18 @@
 ## 11-02-2024
 
 - Updated application to ES6 modules
-  <r>BE - Merged issue 10 into main - ES6 Modules/r>
+  <r>BE - Merged issue 10 into main - ES6 Modules</r>
   <c>This was challenge to make sure all was working</c>
 
 ## 13-02-2024
+
+- Updated app to use TypeScript
+- checked build was OK in Cyclic
+  <r>BE - Merged issue 9 into main - TypeScript</r>
+
+## 14-02-2024
+
+- Added linting and prettier to standardise formating of the code
+  <r>BE - Merged issue 11 into main - Liniting</r>
 
 - Add Typescript to project

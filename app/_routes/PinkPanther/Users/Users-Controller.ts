@@ -7,7 +7,7 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({ data: users });
   } catch (err) {
-    return next(res.status(500).json({ error: `Data not found` }));
+    next(res.status(500).json({ error: `Data not found` }));
   }
 });
 
@@ -15,7 +15,8 @@ export const getUser = asyncHandler(async (req, res, next) => {
   const User = await UserSchema.findById(req.params.id);
 
   if (!User) {
-    return next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    return;
   }
 
   res.status(200).json({ success: true, data: User });
@@ -31,7 +32,8 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   let updateUser = await UserSchema.findById(req.params.id);
 
   if (!updateUser) {
-    return next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    return;
   }
 
   updateUser = await UserSchema.findByIdAndUpdate(req.params.id, req.body, {
@@ -42,10 +44,11 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 });
 
 export const deleteUser = asyncHandler(async (req, res, next) => {
-  let deleteUser = await UserSchema.findById(req.params.id);
+  const deleteUser = await UserSchema.findById(req.params.id);
 
   if (!deleteUser) {
-    return next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    return;
   }
 
   // deleteUser.remove();
