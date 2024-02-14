@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import Crypto from "crypto";
+import { type Request, type Response, type NextFunction } from "express";
+// import Crypto from "crypto";
 import "dotenv/config";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const VerifyToken = async (req: Request, res: Response, next: NextFunction) => {
+const VerifyToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   // if (!req.headers.authorization) {
   //   return res.status(403).json({ message: 'No Authorization' });
   // }
@@ -36,7 +36,7 @@ const VerifyToken = async (req: Request, res: Response, next: NextFunction) => {
     //   };
     // next();
   } catch (ex) {
-    return res.status(500).json({ message: "Token expired", token: null });
+    res.status(500).json({ message: "Token expired", token: null });
   }
 };
 

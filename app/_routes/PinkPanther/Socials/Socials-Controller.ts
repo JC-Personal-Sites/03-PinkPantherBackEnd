@@ -7,7 +7,7 @@ const getSocials = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({ data: socials });
   } catch (err) {
-    return next(res.status(500).json({ error: `Data not found` }));
+    next(res.status(500).json({ error: `Data not found` }));
   }
 });
 

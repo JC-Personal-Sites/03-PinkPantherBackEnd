@@ -2,18 +2,18 @@ import axios from "axios";
 import asyncHandler from "express-async-handler";
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
 
-type TFinalChunk = {
+interface TFinalChunk {
   type: "html" | "string";
   value: string;
-};
+}
 
-type TContent = {
+interface TContent {
   title: string;
   data: {
     columns: string[];
     rows: TFinalChunk[];
   };
-};
+}
 
 export const getAbout = asyncHandler(async (req, res, next) => {
   try {
@@ -26,7 +26,7 @@ export const getAbout = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({ data: aboutData });
   } catch (err) {
-    return next(res.status(500).json({ error: `Data not found` }));
+    next(res.status(500).json({ error: `Data not found` }));
   }
 });
 
@@ -46,7 +46,7 @@ export const getHistory = asyncHandler(async (req, res, next) => {
     let end = 7;
 
     while (end < 27) {
-      let chunk = tempWorkings.slice(start, end);
+      const chunk = tempWorkings.slice(start, end);
       start = end;
       end = start === 7 ? 14 : start + 6;
       if (chunk.length > 6) {
@@ -68,12 +68,12 @@ export const getHistory = asyncHandler(async (req, res, next) => {
 
     const historyData = {
       title: "History Page - WikiPedia API with destructure",
-      content: content,
+      content,
     };
 
     res.status(200).json({ data: historyData });
   } catch (err) {
-    return next(res.status(500).json({ error: `Data not found` }));
+    next(res.status(500).json({ error: `Data not found` }));
   }
 });
 
