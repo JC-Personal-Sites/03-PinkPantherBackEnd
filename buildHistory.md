@@ -41,12 +41,12 @@
 ## 13-02-2024
 
 - Updated app to use TypeScript
-- checked build was OK in Cyclic
-  <r>BE - Merged issue 9 into main - TypeScript</r>
 
 ## 14-02-2024
 
+- Add Typescript typing to project
+  <r>BE - Merged issue 9 into main - TypeScript</r>
+- checked build was OK in Cyclic
 - Added linting and prettier to standardise formating of the code
   <r>BE - Merged issue 11 into main - Liniting</r>
-
-- Add Typescript to project
+- bug fix in History page pushed staright to main
