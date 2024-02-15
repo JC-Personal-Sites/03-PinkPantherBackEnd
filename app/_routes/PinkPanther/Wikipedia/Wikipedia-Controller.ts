@@ -2,16 +2,11 @@ import axios from "axios";
 import asyncHandler from "express-async-handler";
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
 
-type TFinalChunk = {
-  type: "html" | "string";
-  value: string;
-};
-
 type TContent = {
   title: string;
   data: {
     columns: string[];
-    rows: [TFinalChunk[]];
+    rows: string[][];
   };
 };
 
@@ -36,7 +31,7 @@ export const getHistory = asyncHandler(async (req, res, next) => {
     const data = await api.get("/page/talk/Pink_Panther_(character)/1196918442").then((res) => res.data);
 
     // ---- workings needed to delimite text string from Wikipedia ---- \\
-    const content: TContent = { title: "", data: { columns: [], rows: [[]] } };
+    const content: TContent = { title: "", data: { columns: [], rows: [] } };
     const hData = data.topics[11];
     content.title = hData.html;
     content.data.columns = hData.replies[0].html.split("<br>").filter((n: string, i: number) => n && i < 6);
@@ -54,22 +49,16 @@ export const getHistory = asyncHandler(async (req, res, next) => {
       }
 
       // refactor for global table rows
-      const finalChunk: TFinalChunk[] = [];
+      const finalChunk: string[] = [];
       chunk.forEach((c: string, i: number) => {
         // Workings for links in data to work working when rendered
-        finalChunk.push({
-          type: `${i === 1 || i === 3 ? "html" : "string"}`,
-          value:
-            i === 1 || i === 3
-              ? c.replace("./", "https://en.wikipedia.org/wiki/").replace('">', '" target="_blank">')
-              : c,
-        });
+        finalChunk.push(
+          i === 1 || i === 3 ? c.replace("./", "https://en.wikipedia.org/wiki/").replace('">', '" target="_blank">') : c
+        );
       });
 
       content.data.rows.push(finalChunk);
     }
-
-    content.data.rows.shift();
 
     const historyData = {
       title: "History Page - WikiPedia API with destructure",
