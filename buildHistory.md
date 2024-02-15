@@ -50,3 +50,6 @@
 - Added linting and prettier to standardise formating of the code
   <r>BE - Merged issue 11 into main - Liniting</r>
 - bug fix in History page pushed staright to main
+
+handy video for express and typescript
+https://youtu.be/KgnJNJk9-to?si=Dj3ZS98DQ5CYSID5
