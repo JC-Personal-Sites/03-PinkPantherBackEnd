@@ -2,9 +2,9 @@ import { Schema, model } from "mongoose";
 
 const NavBarSchema = new Schema(
   {
-    id: { type: Number, required: [true, "Required"] },
-    title: { type: String, required: [true, "Required"] },
-    link: { type: String, required: [true, "Required"] },
+    id: { type: Number, unique: true, required: [true, "Required"] },
+    title: { type: String, unique: true, required: [true, "Required"] },
+    link: { type: String, unique: true, required: [true, "Required"] },
   },
   {
     versionKey: false,

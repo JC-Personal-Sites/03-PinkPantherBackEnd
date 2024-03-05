@@ -106,6 +106,12 @@ app.use("/pinkpanther/wikipedia", wikipediaRoute);
 app.use(errorHandler); // Has to go after 'Mountings'
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode in port ${PORT}`.yellow.bold);
+});
+
+process.on("unhandledRejection", (err: any, promise: any) => {
+  console.log(`Database Error: ${err.message}`);
+  // Close Server and Exit
+  server.close(() => process.exit(1));
 });

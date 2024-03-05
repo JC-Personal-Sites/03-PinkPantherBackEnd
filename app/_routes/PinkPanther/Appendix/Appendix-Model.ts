@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const AppendixSchema = new Schema(
   {
-    id: { type: Number, required: [true, "Required"] },
+    id: { type: Number, unique: true, required: [true, "Required"] },
     reference: { type: String, required: [true, "Required"] },
     link: { type: String },
     comments: { type: String },

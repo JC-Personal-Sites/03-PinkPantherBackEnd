@@ -2,8 +2,8 @@ import { Schema, model } from "mongoose";
 
 const VideoSchema = new Schema(
   {
-    title: { type: String, required: [true, "Required"] },
-    url: { type: String, required: [true, "Required"] },
+    title: { type: String, unique: true, required: [true, "Required"] },
+    url: { type: String, unique: true, required: [true, "Required"] },
     episode: { type: String },
     season: { type: String },
     likes: { type: String },
