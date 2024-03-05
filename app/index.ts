@@ -1,8 +1,8 @@
 import "colors";
 import "dotenv/config";
-import express from "express";
-import morgan from "morgan";
-import connectDB from "./_mongoDB";
+import express from "express"; // node js frameworked used to build out applications
+import morgan from "morgan"; // logs to the console http resquests
+import connectDB from "./_mongoDB"; // mongo DB connection
 import errorHandler from "./middleware/errorHandler"; // Express bespoke error handling
 
 // ---- Routes ----------------------------------
@@ -18,10 +18,10 @@ import wikipediaRoute from "./_routes/PinkPanther/Wikipedia/Wikipedia-Routes";
 
 // ========== Addition Security =============== \\
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser"; // Parse Cookie header and populate req.cookies
 import cors from "cors"; // Cross-Origin Resource Sharing - for commincating with web server - trusted routes i.e. http://localhost:3000
-import mongoSanitize from "express-mongo-sanitize";
-import rateLimit from "express-rate-limit";
+import mongoSanitize from "express-mongo-sanitize"; // NoSql injection attacks
+import rateLimit from "express-rate-limit"; // prevents the IP requesting multiple times - brut force attack
 import helmet from "helmet"; // HTTP Headers
 import hpp from "hpp"; // HTTP Parameter Pollution attacks
 
@@ -30,7 +30,6 @@ if (
   !("WIKIPEDIA_API" in process.env) ||
   !("MONGODB_URI" in process.env) ||
   !("JC_ALLOWED_ORIGINS_CORS" in process.env)
-  // !('MONGODB_URI' in process.env) ||
   // !('JWT_SECRET' in process.env) ||
   // !('JWT_EXPIRYTIME' in process.env) ||
   // !('JWT_FGP_COOKIENAME' in process.env) ||
