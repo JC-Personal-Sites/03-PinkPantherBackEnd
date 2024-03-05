@@ -5,8 +5,8 @@ const userRoute = express
   .Router()
   .get("/", getUsers)
   .post("/", createUser)
-  .get("/:id", getUser)
-  .put("/:id", updateUser)
-  .delete("/:id", deleteUser);
+  .get("/", getUser) // Need to think this one through as going to need a different path
+  .put("/", updateUser)
+  .delete("/", deleteUser);
 
 export default userRoute;

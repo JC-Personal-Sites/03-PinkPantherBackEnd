@@ -2,16 +2,17 @@
 import type { ErrorRequestHandler } from "express";
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  // This has been created so we send a JSON response which can be handled on the FE
   const error = { ...err };
 
   error.message = err.message;
 
   // Log to console the error object
-  console.log(err);
+  console.log(err.stack.red);
 
   // Mongoose bad ObjectId
   if (err.name === "CastError") {
-    error.message = `Resource not found`;
+    error.message = `Resource not found ${err.value}`;
     error.statusCode = 404;
   }
 
@@ -23,7 +24,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
   // Mongoose validation error
   if (err.name === "ValidationError") {
-    error.message = "Validation Error";
+    error.message = Object.values(err.errors).map((v: any) => v.message);
     error.statusCode = 400;
   }
 

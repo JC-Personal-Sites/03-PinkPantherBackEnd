@@ -1,14 +1,9 @@
-import asyncHandler from "express-async-handler";
+import asyncHandler from "express-async-handler"; // See notes in _Root
 import PictureSchema from "./Pictures-Model";
 
 const getPictures = asyncHandler(async (req, res, next) => {
-  try {
-    const pictures = await PictureSchema.find();
-
-    res.status(200).json({ data: pictures });
-  } catch (err) {
-    next(res.status(500).json({ error: `Data not found` }));
-  }
+  const pictures = await PictureSchema.find();
+  res.status(200).json({ data: pictures });
 });
 
 export default getPictures;

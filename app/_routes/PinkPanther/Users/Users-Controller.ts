@@ -1,4 +1,6 @@
-import asyncHandler from "express-async-handler";
+// JH - None of this has been coded out correctly yet
+
+import asyncHandler from "express-async-handler"; // See notes in _Root
 import UserSchema from "./Users-Model";
 
 export const getUsers = asyncHandler(async (req, res, next) => {
@@ -7,7 +9,7 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 
     res.status(200).json({ data: users });
   } catch (err) {
-    next(res.status(500).json({ error: `Data not found` }));
+    next(err);
   }
 });
 
@@ -23,9 +25,12 @@ export const getUser = asyncHandler(async (req, res, next) => {
 });
 
 export const createUser = asyncHandler(async (req, res, next) => {
-  const createUser = await UserSchema.create(req.body);
-
-  res.status(201).json({ success: true, data: createUser });
+  try {
+    await UserSchema.create(req.body);
+    res.status(201).json({ success: true });
+  } catch (err) {
+    next(res.status(401).json({ error: `Data not able to persist to database` }));
+  }
 });
 
 export const updateUser = asyncHandler(async (req, res, next) => {

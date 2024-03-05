@@ -1,14 +1,9 @@
-import asyncHandler from "express-async-handler";
+import asyncHandler from "express-async-handler"; // See notes in _Root
 import SocialsSchema from "./Socials-Model";
 
 const getSocials = asyncHandler(async (req, res, next) => {
-  try {
-    const socials = await SocialsSchema.find();
-
-    res.status(200).json({ data: socials });
-  } catch (err) {
-    next(res.status(500).json({ error: `Data not found` }));
-  }
+  const socials = await SocialsSchema.find();
+  res.status(200).json({ data: socials });
 });
 
 export default getSocials;
