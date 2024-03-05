@@ -41,13 +41,15 @@ if (
 // ============================================ \\
 
 const app = express();
-app.use(hpp());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
 // ==== This is all additonal security for the API ==== \\
+// Params Pollution
+app.use(hpp());
+
 // Sanitize data
 app.use(mongoSanitize());
 
