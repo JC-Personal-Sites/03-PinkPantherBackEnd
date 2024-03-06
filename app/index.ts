@@ -11,6 +11,7 @@ import authenticationRoute from "./_routes/PinkPanther/Authentication/Authentica
 import navBarRoute from "./_routes/PinkPanther/NavBar/NavBar-Routes";
 import rootRoute from "./_routes/_Root/Root-Routes";
 import pictureRoute from "./_routes/PinkPanther/Pictures/Pictures-Routes";
+import roleRoute from "./_routes/PinkPanther/Roles/Roles-Routes";
 import socialsRoute from "./_routes/PinkPanther/Socials/Socials-Routes";
 import userRoute from "./_routes/PinkPanther/Users/Users-Routes";
 import videoRoute from "./_routes/PinkPanther/Videos/Videos-Routes";
@@ -95,10 +96,11 @@ connectDB();
 // ================================================
 // Mount Routers
 app.use("/", rootRoute);
-app.use("/pinkpanther", authenticationRoute);
+app.use("/pinkpanther/authentication", authenticationRoute);
 app.use("/pinkpanther/appendix", appendixRoute);
 app.use("/pinkpanther/navBar", navBarRoute);
 app.use("/pinkpanther/pictures", pictureRoute);
+app.use("/pinkpanther/roles", roleRoute);
 app.use("/pinkpanther/socials", socialsRoute);
 app.use("/pinkpanther/videos", videoRoute);
 app.use("/pinkpanther/users", userRoute);
