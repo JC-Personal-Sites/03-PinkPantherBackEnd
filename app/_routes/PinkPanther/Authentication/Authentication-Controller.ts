@@ -9,22 +9,29 @@ export const registerAuth = asyncHandler(async (req, res, next) => {
     _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
   });
 
-  await UserSchema.create({
+  const user = await UserSchema.create({
     id,
     firstName,
     lastName,
     phoneNumber,
     emailAddress,
     roleId,
-    role: roleName,
+    role: roleName?.role,
+    ableToEdit: roleName?.ableToEdit,
     logonData: {
       password,
     },
   });
-  res.status(200).json({ success: true });
+
+  // @ts-expect-error
+  const token = user.getToken();
+
+  res.status(200).json({ success: true, token });
 });
 
 export const loginAuth = asyncHandler(async (req, res, next) => {
+  // @ts-expect-error
+  console.log(req.rateLimit);
   res.status(200).json({ data: { test: "test" } });
 });
 
