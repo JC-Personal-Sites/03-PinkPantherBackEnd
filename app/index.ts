@@ -7,6 +7,7 @@ import errorHandler from "./middleware/errorHandler"; // Express bespoke error h
 
 // ---- Routes ----------------------------------
 import appendixRoute from "./_routes/PinkPanther/Appendix/Appendix-Routes";
+import authenticationRoute from "./_routes/PinkPanther/Authentication/Authentication-Routes";
 import navBarRoute from "./_routes/PinkPanther/NavBar/NavBar-Routes";
 import rootRoute from "./_routes/_Root/Root-Routes";
 import pictureRoute from "./_routes/PinkPanther/Pictures/Pictures-Routes";
@@ -94,6 +95,7 @@ connectDB();
 // ================================================
 // Mount Routers
 app.use("/", rootRoute);
+app.use("/pinkpanther", authenticationRoute);
 app.use("/pinkpanther/appendix", appendixRoute);
 app.use("/pinkpanther/navBar", navBarRoute);
 app.use("/pinkpanther/pictures", pictureRoute);

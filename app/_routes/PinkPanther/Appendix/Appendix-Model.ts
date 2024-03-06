@@ -10,6 +10,7 @@ const AppendixSchema = new Schema(
     comments: { type: String },
     type: { type: String, required: [true, "type is Missing"] },
     topic: { type: String, required: [true, "topic is Missing"] },
+    createAt: { type: Date, default: Date.now },
   },
   {
     versionKey: false,
