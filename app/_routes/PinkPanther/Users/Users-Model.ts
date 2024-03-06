@@ -1,7 +1,8 @@
+import bcrypt from "bcryptjs";
+import Crypto from "crypto";
+import jwt, { type Secret } from "jsonwebtoken";
 import mongoose, { Schema, model } from "mongoose";
 import slugify from "slugify";
-import bcrypt from "bcryptjs";
-import jwt, { type Secret } from "jsonwebtoken";
 
 const UserSchema = new Schema(
   {
@@ -42,26 +43,40 @@ const UserSchema = new Schema(
   }
 );
 
+// hash password and create slug
 UserSchema.pre("save", async function (next) {
   this.slug = slugify(`${this.id} ${this.firstName} ${this.lastName}`, { lower: true });
   const salt = await bcrypt.genSalt(10);
-  // @ts-expect-error
   this.logonData.password = await bcrypt.hash(this.logonData.password, salt);
   next();
 });
 
+// create jwt and fingerprint
 UserSchema.methods.getToken = function () {
-  return jwt.sign(
-    {
-      userId: this._id,
-      user: `${this.firstName} ${this.lastName}`,
-      userRoleId: this.roleId,
-      userRole: this.role,
-      ableToEdit: this.ableToEdit,
-    },
-    process.env.JWT_SECRET as Secret,
-    { expiresIn: process.env.JWT_EXPIRYTIME }
-  );
+  const userFingerprint = Crypto.randomBytes(64).toString("hex");
+  const userFingerprintHash = Crypto.createHash("sha256").update(userFingerprint).digest("hex");
+
+  return {
+    token: jwt.sign(
+      {
+        userId: this._id,
+        user: `${this.firstName} ${this.lastName}`,
+        userRoleId: this.roleId,
+        userRole: this.role,
+        ableToEdit: this.ableToEdit,
+        userFingerPrint: userFingerprintHash,
+      },
+      process.env.JWT_SECRET as Secret,
+      { expiresIn: process.env.JWT_EXPIRYTIME }
+    ),
+    fingerPrint: userFingerprint,
+  };
+};
+
+// Match password
+UserSchema.methods.matchPassword = async function (password: string) {
+  // eslint-disable-next-line @typescript-eslint/return-await
+  return await bcrypt.compare(password, this.logonData.password);
 };
 
 export default model("Pinkpantherusers", UserSchema);

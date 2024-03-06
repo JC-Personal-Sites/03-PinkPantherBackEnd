@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "allowSyntheticDefaultImports": true
   }
 }
