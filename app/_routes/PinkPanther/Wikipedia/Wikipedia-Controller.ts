@@ -1,5 +1,7 @@
 import axios from "axios";
+import { type NextFunction, type Request, type Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
+
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
 
 type TContent = {
@@ -10,7 +12,7 @@ type TContent = {
   };
 };
 
-export const getAbout = asyncHandler(async (req, res, next) => {
+export const getAbout = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const data = await api.get("/page/summary/Pink_Panther_(character)").then((res) => res.data);
   const aboutData = {
     title: "About Page - WikiPedia API",
@@ -21,7 +23,7 @@ export const getAbout = asyncHandler(async (req, res, next) => {
   res.status(200).json({ data: aboutData });
 });
 
-export const getHistory = asyncHandler(async (req, res, next) => {
+export const getHistory = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   // By passing in the revission this will keep the response stable
   const data = await api.get("/page/talk/Pink_Panther_(character)/1196918442").then((res) => res.data);
 

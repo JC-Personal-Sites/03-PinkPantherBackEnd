@@ -31,11 +31,11 @@ import hpp from "hpp"; // HTTP Parameter Pollution attacks
 if (
   !("WIKIPEDIA_API" in process.env) ||
   !("MONGODB_URI" in process.env) ||
-  !("JC_ALLOWED_ORIGINS_CORS" in process.env)
-  // !('JWT_SECRET' in process.env) ||
-  // !('JWT_EXPIRYTIME' in process.env) ||
-  // !('JWT_FGP_COOKIENAME' in process.env) ||
-  // !('JWT_FGP_COOKIE_EXPIRYTIME' in process.env) ||
+  !("JC_ALLOWED_ORIGINS_CORS" in process.env) ||
+  !("JWT_SECRET" in process.env) ||
+  !("JWT_EXPIRYTIME" in process.env) ||
+  !("JWT_FGP_COOKIENAME" in process.env) ||
+  !("JWT_FGP_COOKIE_EXPIRYTIME" in process.env)
 ) {
   console.error("FATAL ERROR: required env vars undefined");
   process.exit(1);

@@ -1,9 +1,11 @@
 // JH - None of this has been coded out correctly yet
 
+import { type NextFunction, type Request, type Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
+
 import UserSchema from "./Users-Model";
 
-export const getUsers = asyncHandler(async (req, res, next) => {
+export const getUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await UserSchema.find();
 
@@ -13,7 +15,7 @@ export const getUsers = asyncHandler(async (req, res, next) => {
   }
 });
 
-export const getUser = asyncHandler(async (req, res, next) => {
+export const getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const User = await UserSchema.findById(req.params.id);
 
   if (!User) {
@@ -24,7 +26,7 @@ export const getUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: User });
 });
 
-export const createUser = asyncHandler(async (req, res, next) => {
+export const createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   try {
     await UserSchema.create(req.body);
     res.status(201).json({ success: true });
@@ -33,7 +35,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-export const updateUser = asyncHandler(async (req, res, next) => {
+export const updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   let updateUser = await UserSchema.findById(req.params.id);
 
   if (!updateUser) {
@@ -48,7 +50,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: updateUser });
 });
 
-export const deleteUser = asyncHandler(async (req, res, next) => {
+export const deleteUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const deleteUser = await UserSchema.findById(req.params.id);
 
   if (!deleteUser) {

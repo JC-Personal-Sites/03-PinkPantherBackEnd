@@ -1,16 +1,18 @@
+import { type NextFunction, type Request, type Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 import RoleSchema from "../Roles/Roles-Model";
 import UserSchema from "../Users/Users-Model";
+import setTokenResponse from "../_localHelpers/tokenHelper";
 
-export const register = asyncHandler(async (req, res, next) => {
+export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { id, firstName, lastName, phoneNumber, emailAddress, roleId, password } = req.body;
 
   const roleName = await RoleSchema.findOne({
     _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
   });
 
-  const user = await UserSchema.create({
+  const userDetails = await UserSchema.create({
     id,
     firstName,
     lastName,
@@ -24,13 +26,10 @@ export const register = asyncHandler(async (req, res, next) => {
     },
   });
 
-  // @ts-expect-error
-  const token = user.getToken();
-
-  res.status(200).json({ success: true, token });
+  setTokenResponse(userDetails, 200, res);
 });
 
-export const login = asyncHandler(async (req, res, next) => {
+export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { emailAddress, password } = req.body;
 
   // @ts-expect-error
@@ -80,8 +79,6 @@ export const login = asyncHandler(async (req, res, next) => {
     }
     next(res.status(403).json({ error: "Invalid Credentials" }));
   }
-  // @ts-expect-error
-  const tokenData = userDetails.getToken();
 
   await UserSchema.updateOne(
     {
@@ -95,24 +92,17 @@ export const login = asyncHandler(async (req, res, next) => {
     }
   );
 
-  res.cookie(process.env.JWT_FGP_COOKIENAME, tokenData.fingerprint, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    maxAge: +process.env.JWT_FGP_COOKIE_EXPIRYTIME,
-  });
-
-  res.status(200).json({ message: "Login successful", token: tokenData.token });
+  setTokenResponse(userDetails, 200, res);
 });
 
-export const forgotPassword = asyncHandler(async (req, res, next) => {
+export const forgotPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
 
-export const approveReset = asyncHandler(async (req, res, next) => {
+export const approveReset = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
 
-export const resetPassword = asyncHandler(async (req, res, next) => {
+export const resetPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });

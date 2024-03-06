@@ -1,7 +1,7 @@
 // Express midddleware to handle errors
-import type { ErrorRequestHandler } from "express";
+import type { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (err, req: Request, res: Response, next: NextFunction) => {
   // This has been created so we send a JSON response which can be handled on the FE
   const error = { ...err };
 
