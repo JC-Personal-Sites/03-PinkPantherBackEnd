@@ -1,6 +1,8 @@
 import express from "express";
 import getSocials from "./Socials-Controller";
 
-const socialsRoute = express.Router().get("/", getSocials);
+import { protect } from "../_localHelpers/authorisationHelper";
+
+const socialsRoute = express.Router().get("/", protect, getSocials);
 
 export default socialsRoute;

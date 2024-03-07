@@ -13,6 +13,7 @@
     "lint": "npx eslint ."
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -30,7 +31,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.6"
   },
   "overrides": {
     "semver": "^7.5.3"
