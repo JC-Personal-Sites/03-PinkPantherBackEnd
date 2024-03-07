@@ -1,11 +1,14 @@
 import Crypto from "crypto";
-import { type NextFunction, type Request, type Response } from "express";
+import { type NextFunction, type Response } from "express";
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
+
+import type { I_JWTToken, I_RequestUser } from "../_localHelpers/modelHelper";
+
 import UserSchema from "../Users/Users-Model";
 
 // Protect routes
-export const protect = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const protect = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   if (!req.cookies[process.env.JWT_FGP_COOKIENAME] || !req.cookies.token) {
     next(res.status(403).json({ message: "No token provided" }));
   }
@@ -24,16 +27,14 @@ export const protect = asyncHandler(async (req: Request, res: Response, next: Ne
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const { userId, userFingerPrint } = jwt.verify(token, process.env.JWT_SECRET) as I_JWTToken;
 
-    // @ts-expect-error
-    if (decoded.userFingerPrint !== Crypto.createHash("sha256").update(userFingerprint).digest("hex")) {
+    if (userFingerPrint !== Crypto.createHash("sha256").update(userFingerprint).digest("hex")) {
       console.log("FGP check");
       next(res.status(401).json({ error: "Not authorized" }));
     }
 
-    // @ts-expect-error
-    req.user = await UserSchema.findById(decoded.userId);
+    req.user = await UserSchema.findById(userId);
 
     next();
   } catch (err) {
@@ -43,10 +44,8 @@ export const protect = asyncHandler(async (req: Request, res: Response, next: Ne
 
 // Grant access to specific roles
 export const authorizedRoles = (...roles: string[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    // @ts-expect-error
+  return (req: I_RequestUser, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user.role)) {
-      // @ts-expect-error
       next(res.status(403).json({ error: `User role ${req.user.role} is not authorized to access this route` }));
     }
     next();
