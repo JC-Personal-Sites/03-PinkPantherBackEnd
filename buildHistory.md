@@ -53,3 +53,22 @@
 
 handy video for express and typescript
 https://youtu.be/KgnJNJk9-to?si=Dj3ZS98DQ5CYSID5
+
+## 05-03-2024
+
+- Updated models
+- Added some helper widdleware
+
+## 06-03-2024
+
+- Added roles that users will be allocated
+- register working
+- login working
+- all tested in postman
+- put the token and fingerprint in cookies
+
+## 07-03-2024
+
+- Protected routes
+- Added filter to navbar based on user role
+- assisted user to the request object

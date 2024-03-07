@@ -1,43 +1,56 @@
-# Instructions for REST-API with! Authentication
+<!-- ABOUT THE PROJECT -->
 
-## Create the Api
+## About The Project
 
-1. `npm init`<br> &nbsp;&nbsp; This create the App with a package.json
-2. In stall all the packages from the package list section.
-3. files to create:<br> &nbsp;&nbsp; - `.gitignore`<br> &nbsp;&nbsp; - `server.js`
-4. Create folders:<br> &nbsp;&nbsp; - `_routes`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">Within this folder create a folder for each of your mongoDB collections. Then inside these folder 3 files 'Controller', 'Model' & 'Routes'</span><br>
+I am building out this project to try an encompass the skills I have gained as a developer so far.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `***-Controller` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">This holds all the HTTP Requests</span><br>
+The application is hosted and you can interact with it here:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `***-Model.js` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">This holds all Schema's for the data</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red; font-weight:bold;">**_This is where you declare your collections!!!_**</span><br>
+[PinkPanther_Showcase_Project](https://pinkpantherreact.netlify.app/)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `***-Routes.js` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">This is where you create the URLs that you connect your controllers to.</span><br>
+The backend is built in Node and Typescript using express library, all connected to a MongoDB hosted in Atlas.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - `config`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">This holds all the connection data</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `config.env` & `db.js`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:red; font-weight:bold;">**_This is where you will declare the DataBase URI_**</span><br><br>
+<!-- GETTING STARTED -->
 
-&nbsp;&nbsp;&nbsp;&nbsp; - `middleware`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">Middleware is just code that allows to tidy up the main code and implement actions by express or mongoose.</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `async.js` & `error.js`<br><br>
+## Getting Started
 
-&nbsp;&nbsp;&nbsp;&nbsp; - `utils`<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-style: italic; color:green">Used to put scripts in that you do not want in your main code.</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; create a files called `errorResponse.js`<br><br>
+To install the application locally please use this npm command.
 
-5. Update start in package.json = <br> &nbsp;&nbsp; - `“start”: “NODE_ENV=production & node server”`<br> &nbsp;&nbsp; - `“dev”: “nodemon server”`
+- npm
+  ```sh
+  npm install
+  ```
 
-## Packages to install
+### Installation
 
-1. Nodemon = `npm install -D nodemon`
-2. Express and .env = `npm i express dotenv`
-3. Morgan = `npm i morgan`
-4. Mongoose = `npm i mongoose`
-5. Colors console colors = `npm i colors`
-6. This is to help prevent hacker attacks and injection = `npm i express-mongo-sanitize`
-7. Helps protect the DNS helmet = `npm i helmet`
-8. Helps to protect middleware xss = `npm i xss-clean`
-9. helps prevent overloading of the site ratelimit = `npm i express-rate-limit`
-10. protects the URL params hpp = `npm i hpp`
-11. cross-origin enables cors = `npm install cors`
+The application does utilise an environment file that you will not have access to for connecting to the backend.
 
-## Additonal Material
+<!-- USAGE EXAMPLES -->
 
-1. There is Authentification.
-2. Section 6 has extra material like:<br> &nbsp;&nbsp; - Advanced filtering, select, sorting, uploading photo, params.
-3. Section 5 Has information on address and geo locating.
-4. Section 8 Has information on how to link data to a user so only they can alter.
+## Progress
+
+There is a 'buildHistory' file in the application that I have been using to document what I have done, challenges and releases.
+
+I had list of elements I was going to point out based on the authentication implementation but unfornately I have struggled with this today and just not achieved what I hoped.
+
+If you view the 'issues' in GITHub you will see my thought process on tasks still outstanding and completed tasks.
+
+**Positives**
+
+- Do not return the password to the FE if request user details
+- Security in place in the Index.js file
+- Put everything in cookies rather than headers as this is safer
+- Written in TS
+- Uses ES6 modules rather than require
+- I have not squashed the merges so can see commits
+- You can view the issues so you can see what is left to do on the repos
+
+**Negatives**
+
+- Not had time to put this on a Postgres DB
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
