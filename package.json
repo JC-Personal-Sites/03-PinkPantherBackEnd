@@ -10,7 +10,7 @@
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "dev": "nodemon app/index.ts",
-    "lint": "npx eslint ."
+    "lint": "npx eslint . --fix"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",

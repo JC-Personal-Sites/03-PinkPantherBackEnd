@@ -1,11 +1,11 @@
 import express from "express";
-import { createRole, deleteRole, getRoles, updateRole } from "./Roles-Controller";
 
 import { protect } from "../_localHelpers/authorisationHelper";
+import { createRole, deleteRole, getRoles, updateRole } from "./Roles-Controller";
 
 const roleRoute = express
   .Router()
-  .get("/", protect, getRoles)
+  .get("/", getRoles)
   .post("/", protect, createRole)
   .put("/", protect, updateRole)
   .delete("/", protect, deleteRole);

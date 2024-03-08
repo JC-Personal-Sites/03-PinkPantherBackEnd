@@ -5,7 +5,7 @@ import { protect, authorizedRoles } from "../_localHelpers/authorisationHelper";
 
 const appendixRoute = express
   .Router()
-  .get("/", protect, authorizedRoles("Admin", "Visitor"), getAppendixs)
+  .get("/", getAppendixs)
   .post("/", protect, authorizedRoles("Admin", "Visitor"), createAppendix)
   .put("/", protect, authorizedRoles("Admin", "Visitor"), updateAppendix)
   .delete("/", protect, authorizedRoles("Admin", "Visitor"), deleteAppendix);
