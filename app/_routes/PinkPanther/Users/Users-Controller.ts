@@ -3,6 +3,8 @@
 import { type NextFunction, type Request, type Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
+import RoleSchema from "../Roles/Roles-Model";
+import setTokenResponse from "../_localHelpers/tokenHelper";
 import UserSchema from "./Users-Model";
 
 export const getUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -27,12 +29,27 @@ export const getUser = asyncHandler(async (req: Request, res: Response, next: Ne
 });
 
 export const createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    await UserSchema.create(req.body);
-    res.status(201).json({ success: true });
-  } catch (err) {
-    next(res.status(401).json({ error: `Data not able to persist to database` }));
-  }
+  const { id, firstName, lastName, phoneNumber, emailAddress, roleId, password } = req.body;
+
+  const roleName = await RoleSchema.findOne({
+    _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
+  });
+
+  const userDetails = await UserSchema.create({
+    id,
+    firstName,
+    lastName,
+    phoneNumber,
+    emailAddress,
+    roleId,
+    role: roleName?.role,
+    ableToEdit: roleName?.ableToEdit,
+    logonData: {
+      password,
+    },
+  });
+
+  setTokenResponse(userDetails, 200, res);
 });
 
 export const updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {

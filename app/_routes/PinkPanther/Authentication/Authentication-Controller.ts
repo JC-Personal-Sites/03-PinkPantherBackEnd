@@ -1,33 +1,8 @@
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
-import RoleSchema from "../Roles/Roles-Model";
-import UserSchema from "../Users/Users-Model";
 import setTokenResponse from "../_localHelpers/tokenHelper";
-
-export const register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const { id, firstName, lastName, phoneNumber, emailAddress, roleId, password } = req.body;
-
-  const roleName = await RoleSchema.findOne({
-    _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
-  });
-
-  const userDetails = await UserSchema.create({
-    id,
-    firstName,
-    lastName,
-    phoneNumber,
-    emailAddress,
-    roleId,
-    role: roleName?.role,
-    ableToEdit: roleName?.ableToEdit,
-    logonData: {
-      password,
-    },
-  });
-
-  setTokenResponse(userDetails, 200, res);
-});
+import UserSchema from "../Users/Users-Model";
 
 export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const { emailAddress, password } = req.body;
@@ -93,6 +68,10 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
   );
 
   setTokenResponse(userDetails, 200, res);
+});
+
+export const logout = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  res.status(201).json({ success: true });
 });
 
 export const forgotPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
