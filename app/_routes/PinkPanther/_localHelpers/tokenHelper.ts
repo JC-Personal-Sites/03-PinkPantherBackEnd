@@ -5,14 +5,10 @@ const setTokenResponse = (userDetails, status, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: +process.env.JWT_FGP_COOKIE_EXPIRYTIME,
   };
-
-  if (process.env.NODE_ENV === "production") {
-    cookieOptions.secure = true;
-  }
 
   res
     .status(status)
