@@ -72,3 +72,11 @@ https://youtu.be/KgnJNJk9-to?si=Dj3ZS98DQ5CYSID5
 - Protected routes
 - Added filter to navbar based on user role
 - assisted user to the request object
+
+## 10-03-2024
+
+- Added guest functionality
+- Completed Login
+- Started Logout
+  <r>FE - Merged issue 26 into main - Authentication</r>
+  <c>biggest challenge with this work was getting all the TS correct and inline.</c>
