@@ -1,4 +1,4 @@
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 import PictureSchema from "./Pictures-Model";

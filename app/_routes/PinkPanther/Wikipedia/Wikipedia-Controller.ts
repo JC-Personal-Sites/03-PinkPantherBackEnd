@@ -1,5 +1,5 @@
 import axios from "axios";
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });

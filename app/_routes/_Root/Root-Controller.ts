@@ -1,4 +1,4 @@
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler"; // This handler allows to implement DRY and remove the try catch blocks https://www.npmjs.com/package/express-async-handler or https://www.acuriousanimal.com/blog/20180315/express-async-middleware
 
 // This is what the code looked like before using the asyncHandler

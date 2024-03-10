@@ -1,9 +1,8 @@
 // JH - None of this has been coded out correctly yet
 
-import type { NextFunction, Response } from "express";
+import type { NextFunction, Response, Request } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
-import RoleSchema from "../Roles/Roles-Model";
 import type { I_RequestUser } from "../Users/Users-Model";
 import UserSchema from "./Users-Model";
 
@@ -17,23 +16,8 @@ export const getUsers = asyncHandler(async (req: I_RequestUser, res: Response, n
   }
 });
 
-export const getUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  const User = await UserSchema.findById(req.params.id);
-
-  if (!User) {
-    next(res.status(404).json({ status: "error", message: `Data not found with id of ${req.params.id}` }));
-    return;
-  }
-
-  res.status(200).json({ status: "success", data: User });
-});
-
-export const createUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  const { id, firstName, lastName, phoneNumber, emailAddress, roleId, password } = req.body;
-
-  const roleName = await RoleSchema.findOne({
-    _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
-  });
+export const createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  const { id, firstName, lastName, phoneNumber, emailAddress, password } = req.body;
 
   await UserSchema.create({
     id,
@@ -41,9 +25,6 @@ export const createUser = asyncHandler(async (req: I_RequestUser, res: Response,
     lastName,
     phoneNumber,
     emailAddress,
-    roleId,
-    role: roleName?.role,
-    ableToEdit: roleName?.ableToEdit,
     logonData: {
       password,
     },
