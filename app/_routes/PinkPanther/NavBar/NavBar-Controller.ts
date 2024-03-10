@@ -9,8 +9,7 @@ import type { T_NavBar } from "./NavBar-Model";
 import NavBarSchema from "./NavBar-Model";
 
 const getNavBars = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  console.log(req.user);
-  const userAllowedTabs: T_Roles = await RoleSchema.findOne({ _id: req.user.roleId });
+  const userAllowedTabs: T_Roles = await RoleSchema.findOne({ _id: req.query.roleId });
   const navBars: T_NavBar[] = await NavBarSchema.find().sort({ id: "asc" });
 
   // reduce the navbar tabs by userRole
