@@ -70,11 +70,11 @@ export const login = asyncHandler(async (req: I_RequestUser, res: Response, next
     }
   );
 
-  setTokenResponse(req, 200, res);
+  setTokenResponse(req, 200, res, "login");
 });
 
 export const logout = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ status: "success" });
+  setTokenResponse(req, 201, res, "logout");
 });
 
 export const forgotPassword = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
