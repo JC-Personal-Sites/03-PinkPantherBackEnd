@@ -5,20 +5,20 @@ import AppendixSchema from "./Appendix-Model";
 
 export const getAppendixs = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const appendixs = await AppendixSchema.find().sort({ id: "asc" });
-  res.status(200).json({ data: appendixs });
+  res.status(200).json({ status: "success", data: appendixs });
 });
 
 export const createAppendix = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   await AppendixSchema.create(req.body);
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });
 
 export const updateAppendix = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   await AppendixSchema.findByIdAndUpdate(req.body._id, req.body, { new: true, runValidators: true });
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });
 
 export const deleteAppendix = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   await AppendixSchema.deleteOne({ _id: req.query.id });
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });

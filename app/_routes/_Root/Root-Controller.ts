@@ -13,7 +13,7 @@ import asyncHandler from "express-async-handler"; // This handler allows to impl
 // };
 
 const getRoot = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json({ data: { hi: "Hi Justin How Are You?" } });
+  res.status(200).json({ status: "success", data: { hi: "Hi Justin How Are You?" } });
 });
 
 export default getRoot;

@@ -20,7 +20,7 @@ export const getAbout = asyncHandler(async (req: Request, res: Response, next: N
     contents: data.extract,
   };
 
-  res.status(200).json({ data: aboutData });
+  res.status(200).json({ status: "success", data: aboutData });
 });
 
 export const getHistory = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -62,7 +62,7 @@ export const getHistory = asyncHandler(async (req: Request, res: Response, next:
     content,
   };
 
-  res.status(200).json({ data: historyData });
+  res.status(200).json({ status: "success", data: historyData });
 });
 
 export default getAbout;

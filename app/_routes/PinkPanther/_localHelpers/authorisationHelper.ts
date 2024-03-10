@@ -9,7 +9,7 @@ import type { I_RequestUser } from "../Users/Users-Model";
 // Protect routes
 export const protect = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   if (!req.cookies[process.env.JWT_FGP_COOKIENAME] || !req.cookies.token) {
-    next(res.status(403).json({ message: "No token provided" }));
+    next(res.status(403).json({ status: "error", message: "No token provided" }));
   }
 
   const token = req.cookies.token;
@@ -17,12 +17,12 @@ export const protect = asyncHandler(async (req: I_RequestUser, res: Response, ne
 
   if (!token || !userFingerprint) {
     console.error("token & FGP check");
-    next(res.status(401).json({ error: "Not authorized" }));
+    next(res.status(401).json({ status: "error", message: "Not authorized" }));
   }
 
   if (typeof userFingerprint !== "string") {
     console.error("check type string");
-    next(res.status(401).json({ error: "Not authorized" }));
+    next(res.status(401).json({ status: "error", message: "Not authorized" }));
   }
 
   try {
@@ -30,12 +30,12 @@ export const protect = asyncHandler(async (req: I_RequestUser, res: Response, ne
 
     if (userFingerPrint !== Crypto.createHash("sha256").update(userFingerprint).digest("hex")) {
       console.error("FGP check");
-      next(res.status(401).json({ error: "Not authorized" }));
+      next(res.status(401).json({ status: "error", message: "Not authorized" }));
     }
 
     next();
   } catch (err) {
-    next(res.status(401).json({ error: "Not authorized Error" }));
+    next(res.status(401).json({ status: "error", message: "Not authorized Error" }));
   }
 });
 
@@ -43,7 +43,11 @@ export const protect = asyncHandler(async (req: I_RequestUser, res: Response, ne
 export const authorizedRoles = (...roles: string[]) => {
   return (req: I_RequestUser, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user.role)) {
-      next(res.status(403).json({ error: `User role ${req.user.role} is not authorized to access this route` }));
+      next(
+        res
+          .status(403)
+          .json({ status: "error", message: `User role ${req.user.role} is not authorized to access this route` })
+      );
     }
     next();
   };

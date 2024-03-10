@@ -5,7 +5,7 @@ import VideoSchema from "./Videos-Model";
 
 const getVideos = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   const videos = await VideoSchema.find();
-  res.status(200).json({ data: videos });
+  res.status(200).json({ status: "success", data: videos });
 });
 
 export default getVideos;

@@ -9,17 +9,21 @@ export const login = asyncHandler(async (req: I_RequestUser, res: Response, next
   const { emailAddress, password } = req.body;
 
   if (req.rateLimit.remaining === 0) {
-    next(res.status(429).json({ error: "Your account is locked, please use the forgotten password link" }));
+    next(
+      res
+        .status(429)
+        .json({ status: "error", message: "Your account is locked, please use the forgotten password link" })
+    );
   }
 
   req.user = await UserSchema.findOne({ emailAddress }).select("+logonData.password");
 
   if (!req.user) {
-    next(res.status(401).json({ error: "Invalid Credentials" }));
+    next(res.status(401).json({ status: "error", message: "Invalid Credentials" }));
   }
 
   if (req.user?.logonData?.numberOfFailedLogons === 5) {
-    next(res.status(403).json({ error: "Account is Locked please contact admin" }));
+    next(res.status(403).json({ status: "error", message: "Account is Locked please contact admin" }));
   }
 
   const matched = await Promise.resolve(req.user.matchPassword(password));
@@ -51,7 +55,7 @@ export const login = asyncHandler(async (req: I_RequestUser, res: Response, next
         }
       );
     }
-    next(res.status(403).json({ error: "Invalid Credentials" }));
+    next(res.status(403).json({ status: "error", message: "Invalid Credentials" }));
   }
 
   await UserSchema.updateOne(
@@ -70,17 +74,17 @@ export const login = asyncHandler(async (req: I_RequestUser, res: Response, next
 });
 
 export const logout = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });
 
 export const forgotPassword = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });
 
 export const approveReset = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });
 
 export const resetPassword = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ success: true });
+  res.status(201).json({ status: "success" });
 });

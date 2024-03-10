@@ -11,7 +11,7 @@ export const getUsers = asyncHandler(async (req: I_RequestUser, res: Response, n
   try {
     const users = await UserSchema.find();
 
-    res.status(200).json({ data: users });
+    res.status(200).json({ status: "success", data: users });
   } catch (err) {
     next(err);
   }
@@ -21,11 +21,11 @@ export const getUser = asyncHandler(async (req: I_RequestUser, res: Response, ne
   const User = await UserSchema.findById(req.params.id);
 
   if (!User) {
-    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ status: "error", message: `Data not found with id of ${req.params.id}` }));
     return;
   }
 
-  res.status(200).json({ success: true, data: User });
+  res.status(200).json({ status: "success", data: User });
 });
 
 export const createUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
@@ -49,14 +49,14 @@ export const createUser = asyncHandler(async (req: I_RequestUser, res: Response,
     },
   });
 
-  res.status(200).json({ success: true });
+  res.status(200).json({ status: "success" });
 });
 
 export const updateUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   let updateUser = await UserSchema.findById(req.params.id);
 
   if (!updateUser) {
-    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ status: "error", message: `Data not found with id of ${req.params.id}` }));
     return;
   }
 
@@ -64,19 +64,19 @@ export const updateUser = asyncHandler(async (req: I_RequestUser, res: Response,
     new: true,
     runValidators: true,
   });
-  res.status(200).json({ success: true, data: updateUser });
+  res.status(200).json({ status: "success", data: updateUser });
 });
 
 export const deleteUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   const deleteUser = await UserSchema.findById(req.params.id);
 
   if (!deleteUser) {
-    next(res.status(404).json({ error: `Data not found with id of ${req.params.id}` }));
+    next(res.status(404).json({ status: "error", message: `Data not found with id of ${req.params.id}` }));
     return;
   }
 
   // deleteUser.remove();
-  res.status(200).json({ success: true, data: {} });
+  res.status(200).json({ status: "success", data: {} });
 });
 
 export default getUsers;

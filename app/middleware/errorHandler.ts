@@ -29,8 +29,8 @@ const errorHandler: ErrorRequestHandler = (err, req: Request, res: Response, nex
   }
 
   res.status(error.statusCode || 500).json({
-    success: false,
-    error: error.message || "Server Error",
+    status: "error",
+    message: error.message || "Server Error",
   });
 };
 

@@ -15,7 +15,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response): vo
   };
 
   if (req.user.id === 0) {
-    res.status(status).json({ success: true, user: resUser });
+    res.status(status).json({ status: "success", data: resUser });
   } else {
     const tokenData = req.user.getToken();
 
@@ -32,7 +32,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response): vo
       .cookie(process.env.JWT_FGP_COOKIENAME, tokenData.fingerPrint, cookieOptions)
       // @ts-expect-error
       .cookie("token", tokenData.token, cookieOptions)
-      .json({ success: true, user: resUser });
+      .json({ status: "success", data: resUser });
   }
 };
 

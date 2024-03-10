@@ -14,7 +14,7 @@ const getNavBars = asyncHandler(async (req: I_RequestUser, res: Response, next: 
 
   // reduce the navbar tabs by userRole
   const allowedTabs = navBars.filter(({ _id }) => userAllowedTabs.navBarIds.includes(_id));
-  res.status(200).json({ data: allowedTabs });
+  res.status(200).json({ status: "success", data: allowedTabs });
 });
 
 export default getNavBars;
