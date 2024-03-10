@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import type { ObjectId } from "bson";
 
 const RoleSchema = new Schema(
   {
@@ -10,5 +11,12 @@ const RoleSchema = new Schema(
     versionKey: false,
   }
 );
+
+export type T_Roles = {
+  _id: ObjectId;
+  role: string;
+  navBarIds: ObjectId[];
+  ableToEdit: boolean;
+};
 
 export default model("Pinkpantherroles", RoleSchema);

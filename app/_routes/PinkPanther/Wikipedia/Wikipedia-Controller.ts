@@ -1,5 +1,5 @@
 import axios from "axios";
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 const api = axios.create({ baseURL: process.env.WIKIPEDIA_API });
@@ -20,7 +20,7 @@ export const getAbout = asyncHandler(async (req: Request, res: Response, next: N
     contents: data.extract,
   };
 
-  res.status(200).json({ data: aboutData });
+  res.status(200).json({ status: "success", data: aboutData });
 });
 
 export const getHistory = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -62,7 +62,7 @@ export const getHistory = asyncHandler(async (req: Request, res: Response, next:
     content,
   };
 
-  res.status(200).json({ data: historyData });
+  res.status(200).json({ status: "success", data: historyData });
 });
 
 export default getAbout;

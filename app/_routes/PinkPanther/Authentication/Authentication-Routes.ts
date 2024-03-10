@@ -1,6 +1,8 @@
 import express from "express";
 import rateLimit from "express-rate-limit";
-import { approveReset, forgotPassword, login, register, resetPassword } from "./Authentication-Controller";
+
+import { protect } from "../_localHelpers/authorisationHelper";
+import { approveReset, forgotPassword, login, logout, resetPassword } from "./Authentication-Controller";
 
 const apiLimited = rateLimit({
   windowMs: 15000, // 15 minutes
@@ -9,10 +11,10 @@ const apiLimited = rateLimit({
 
 const authenticationRoute = express
   .Router()
-  .post("/register", register)
   .post("/login", apiLimited, login)
+  .post("/logout", logout)
   .post("/forgotPassword", forgotPassword)
-  .post("/approveReset", approveReset)
-  .post("/resetPassword", resetPassword);
+  .post("/approveReset", protect, approveReset)
+  .post("/resetPassword", protect, resetPassword);
 
 export default authenticationRoute;
