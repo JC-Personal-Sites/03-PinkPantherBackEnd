@@ -69,6 +69,7 @@ export interface I_RequestUser extends Request {
     createAt: Date;
     matchPassword?: (password: string) => {};
     getToken?: () => {};
+    getUser?: () => {};
   };
   rateLimit?: {
     remaining?: number;
@@ -98,6 +99,21 @@ UserSchema.methods.getToken = function () {
       process.env.JWT_SECRET as Secret
     ),
     fingerPrint: userFingerprint,
+  };
+};
+
+// create jwt with User Details
+UserSchema.methods.getUser = function () {
+  return {
+    _id: this._id,
+    id: this.id,
+    slug: this.slug,
+    name: this.firstName + " " + this.lastName,
+    emailAddress: this.emailAddress,
+    roleId: this.roleId,
+    role: this.role,
+    ableToEdit: this.ableToEdit,
+    createAt: this.createAt,
   };
 };
 

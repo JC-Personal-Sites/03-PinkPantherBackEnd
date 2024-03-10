@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 import type { I_JWTToken } from "../Authentication/Authentication-Model";
 import type { I_RequestUser } from "../Users/Users-Model";
+import UserSchema from "../Users/Users-Model";
 
 // Protect routes
 export const protect = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
@@ -26,12 +27,14 @@ export const protect = asyncHandler(async (req: I_RequestUser, res: Response, ne
   }
 
   try {
-    const { userFingerPrint } = jwt.verify(token, process.env.JWT_SECRET) as I_JWTToken;
+    const { userId, userFingerPrint } = jwt.verify(token, process.env.JWT_SECRET) as I_JWTToken;
 
     if (userFingerPrint !== Crypto.createHash("sha256").update(userFingerprint).digest("hex")) {
       console.error("FGP check");
       next(res.status(401).json({ status: "error", message: "Not authorized" }));
     }
+
+    req.user = await UserSchema.findById(userId);
 
     next();
   } catch (err) {
