@@ -17,13 +17,15 @@ export const getUsers = asyncHandler(async (req: I_RequestUser, res: Response, n
 });
 
 export const createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  const { id, firstName, lastName, phoneNumber, emailAddress, password } = req.body;
+  const { firstName, lastName, emailAddress, password } = req.body;
+
+  const lastUser = await UserSchema.find().sort({ id: -1 }).limit(1);
+  const newId: number = lastUser[0].id + 1;
 
   await UserSchema.create({
-    id,
+    id: newId,
     firstName,
     lastName,
-    phoneNumber,
     emailAddress,
     logonData: {
       password,
