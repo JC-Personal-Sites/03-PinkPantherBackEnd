@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import Crypto from "crypto";
+import type { Request } from "express";
 import jwt, { type Secret } from "jsonwebtoken";
 import mongoose, { Schema, model } from "mongoose";
 import slugify from "slugify";
@@ -43,6 +44,37 @@ const UserSchema = new Schema(
   }
 );
 
+export interface I_RequestUser extends Request {
+  user: {
+    _id: string;
+    id: number;
+    slug: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber?: string;
+    emailAddress: string;
+    roleId: string;
+    role: string;
+    ableToEdit: boolean;
+    logonData: {
+      password: string;
+      lastLogonDateTime: Date;
+      numberOfFailedLogons: number;
+      resetPasswordToken?: string;
+      resetPasswordSent?: Date;
+      resetPasswordExpires?: Date;
+      lockedOut?: boolean;
+      lockedOutDateTime?: Date;
+    };
+    createAt: Date;
+    matchPassword?: (password: string) => {};
+    getToken?: () => {};
+  };
+  rateLimit?: {
+    remaining?: number;
+  };
+}
+
 // hash password and create slug
 UserSchema.pre("save", async function (next) {
   this.slug = slugify(`${this.id} ${this.firstName} ${this.lastName}`, { lower: true });
@@ -60,14 +92,10 @@ UserSchema.methods.getToken = function () {
     token: jwt.sign(
       {
         userId: this._id,
-        user: `${this.firstName} ${this.lastName}`,
-        userRoleId: this.roleId,
-        userRole: this.role,
-        ableToEdit: this.ableToEdit,
         userFingerPrint: userFingerprintHash,
+        expiresIn: process.env.JWT_EXPIRYTIME,
       },
-      process.env.JWT_SECRET as Secret,
-      { expiresIn: process.env.JWT_EXPIRYTIME }
+      process.env.JWT_SECRET as Secret
     ),
     fingerPrint: userFingerprint,
   };

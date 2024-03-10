@@ -1,13 +1,13 @@
 // JH - None of this has been coded out correctly yet
 
-import { type NextFunction, type Request, type Response } from "express";
+import type { NextFunction, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 import RoleSchema from "../Roles/Roles-Model";
-import setTokenResponse from "../_localHelpers/tokenHelper";
+import type { I_RequestUser } from "../Users/Users-Model";
 import UserSchema from "./Users-Model";
 
-export const getUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const getUsers = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   try {
     const users = await UserSchema.find();
 
@@ -17,7 +17,7 @@ export const getUsers = asyncHandler(async (req: Request, res: Response, next: N
   }
 });
 
-export const getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const getUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   const User = await UserSchema.findById(req.params.id);
 
   if (!User) {
@@ -28,14 +28,14 @@ export const getUser = asyncHandler(async (req: Request, res: Response, next: Ne
   res.status(200).json({ success: true, data: User });
 });
 
-export const createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const createUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   const { id, firstName, lastName, phoneNumber, emailAddress, roleId, password } = req.body;
 
   const roleName = await RoleSchema.findOne({
     _id: roleId ?? "65e86cebf51a1dfb57fb9e26",
   });
 
-  const userDetails = await UserSchema.create({
+  await UserSchema.create({
     id,
     firstName,
     lastName,
@@ -49,10 +49,10 @@ export const createUser = asyncHandler(async (req: Request, res: Response, next:
     },
   });
 
-  setTokenResponse(userDetails, 200, res);
+  res.status(200).json({ success: true });
 });
 
-export const updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const updateUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   let updateUser = await UserSchema.findById(req.params.id);
 
   if (!updateUser) {
@@ -67,7 +67,7 @@ export const updateUser = asyncHandler(async (req: Request, res: Response, next:
   res.status(200).json({ success: true, data: updateUser });
 });
 
-export const deleteUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const deleteUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   const deleteUser = await UserSchema.findById(req.params.id);
 
   if (!deleteUser) {

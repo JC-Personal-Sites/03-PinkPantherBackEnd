@@ -6,7 +6,7 @@ import { createUser, deleteUser, getUser, getUsers, updateUser } from "./Users-C
 const userRoute = express
   .Router()
   .get("/", getUsers)
-  .post("/", protect, createUser)
+  .post("/", createUser)
   .get("/", protect, getUser) // Need to think this one through as going to need a different path
   .put("/", protect, updateUser)
   .delete("/", protect, deleteUser);

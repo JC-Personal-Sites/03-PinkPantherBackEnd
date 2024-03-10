@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import type { ObjectId } from "bson";
 
 const NavBarSchema = new Schema(
   {
@@ -10,5 +11,12 @@ const NavBarSchema = new Schema(
     versionKey: false,
   }
 );
+
+export type T_NavBar = {
+  _id: ObjectId;
+  id: number;
+  title: string;
+  link: string;
+};
 
 export default model("Pinkpanthernavbars", NavBarSchema);

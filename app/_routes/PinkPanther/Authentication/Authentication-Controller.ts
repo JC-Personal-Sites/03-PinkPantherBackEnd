@@ -1,35 +1,34 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Response } from "express";
 import asyncHandler from "express-async-handler"; // See notes in _Root
 
 import setTokenResponse from "../_localHelpers/tokenHelper";
+import type { I_RequestUser } from "../Users/Users-Model";
 import UserSchema from "../Users/Users-Model";
 
-export const login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const login = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   const { emailAddress, password } = req.body;
 
-  // @ts-expect-error
   if (req.rateLimit.remaining === 0) {
     next(res.status(429).json({ error: "Your account is locked, please use the forgotten password link" }));
   }
 
-  const userDetails = await UserSchema.findOne({ emailAddress }).select("+logonData.password");
+  req.user = await UserSchema.findOne({ emailAddress }).select("+logonData.password");
 
-  if (!userDetails) {
+  if (!req.user) {
     next(res.status(401).json({ error: "Invalid Credentials" }));
   }
 
-  if (userDetails?.logonData?.numberOfFailedLogons === 5) {
+  if (req.user?.logonData?.numberOfFailedLogons === 5) {
     next(res.status(403).json({ error: "Account is Locked please contact admin" }));
   }
 
-  // @ts-expect-error
-  const matched = await userDetails.matchPassword(password);
+  const matched = await Promise.resolve(req.user.matchPassword(password));
 
   if (!matched) {
-    const loginFails = userDetails?.logonData?.numberOfFailedLogons ? userDetails.logonData.numberOfFailedLogons++ : 1;
+    const loginFails = req.user?.logonData?.numberOfFailedLogons ? req.user.logonData.numberOfFailedLogons++ : 1;
     await UserSchema.updateOne(
       {
-        _id: userDetails._id,
+        _id: req.user._id,
       },
       {
         $set: {
@@ -39,10 +38,10 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
     );
 
     if (loginFails >= 5) {
-      console.log("overlogins");
+      console.error("overlogins");
       await UserSchema.updateOne(
         {
-          _id: userDetails._id,
+          _id: req.user._id,
         },
         {
           $set: {
@@ -57,7 +56,7 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
 
   await UserSchema.updateOne(
     {
-      _id: userDetails._id,
+      _id: req.user._id,
     },
     {
       $set: {
@@ -67,21 +66,21 @@ export const login = asyncHandler(async (req: Request, res: Response, next: Next
     }
   );
 
-  setTokenResponse(userDetails, 200, res);
+  setTokenResponse(req, 200, res);
 });
 
-export const logout = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const logout = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
 
-export const forgotPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const forgotPassword = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
 
-export const approveReset = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const approveReset = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
 
-export const resetPassword = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const resetPassword = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   res.status(201).json({ success: true });
 });
