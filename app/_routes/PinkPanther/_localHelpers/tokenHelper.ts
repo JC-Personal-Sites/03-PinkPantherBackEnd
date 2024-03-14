@@ -10,10 +10,10 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
       const tokenData = req.user.getToken();
 
       const cookieOptions = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: +process.env.JWT_FGP_COOKIE_EXPIRYTIME,
+        httpOnly: process.env.COOKIE_HTTPONLY,
+        secure: process.env.COOKIE_SECURE,
+        sameSite: process.env.COOKIE_SAMESITE,
+        maxAge: +process.env.COOKIE_MAXAGE,
       };
 
       res
@@ -26,9 +26,9 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
     }
   } else if (task === "logout") {
     const cookieOptions = {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      httpOnly: process.env.COOKIE_HTTPONLY,
+      secure: process.env.COOKIE_SECURE,
+      sameSite: process.env.COOKIE_SAMESITE,
       maxAge: 0,
     };
 
