@@ -80,3 +80,8 @@ https://youtu.be/KgnJNJk9-to?si=Dj3ZS98DQ5CYSID5
 - Started Logout
   <r>FE - Merged issue 26 into main - Authentication</r>
   <c>biggest challenge with this work was getting all the TS correct and inline.</c>
+
+## 13-03-2024
+
+- Created MongoDB triggeres to reset the database every 12 hours
+- Created a production user for database access in Atlas with restricted access.
