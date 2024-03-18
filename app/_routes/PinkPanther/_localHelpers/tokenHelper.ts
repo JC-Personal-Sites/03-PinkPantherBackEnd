@@ -12,7 +12,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
       const cookieOptions = {
         httpOnly: process.env.COOKIE_HTTPONLY,
         secure: process.env.COOKIE_SECURE,
-        sameSite: process.env.COOKIE_SAMESITE,
+        // sameSite: process.env.COOKIE_SAMESITE, // I have had to comment this out as currently honested in different locations
         maxAge: +process.env.COOKIE_MAXAGE,
       };
 
@@ -28,7 +28,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
     const cookieOptions = {
       httpOnly: process.env.COOKIE_HTTPONLY,
       secure: process.env.COOKIE_SECURE,
-      sameSite: process.env.COOKIE_SAMESITE,
+      // sameSite: process.env.COOKIE_SAMESITE, // I have had to comment this out as currently honested in different locations
       maxAge: 0,
     };
 
