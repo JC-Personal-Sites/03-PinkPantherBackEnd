@@ -12,8 +12,8 @@ const apiLimited = rateLimit({
 const authenticationRoute = express
   .Router()
   .post("/login", apiLimited, login)
-  .post("/loggedIn", protect, loggedIn)
-  .post("/logout", logout)
+  .get("/logout", logout)
+  .get("/loggedIn", protect, loggedIn)
   .post("/forgotPassword", forgotPassword)
   .post("/approveReset", protect, approveReset)
   .post("/resetPassword", protect, resetPassword);

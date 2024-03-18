@@ -25,7 +25,11 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
         .json({ status: "success", data: userData });
     }
   } else if (task === "logout") {
-    res.status(status).cookie("", "", {}).json({ status: "success" });
+    res
+      .status(status)
+      .cookie(process.env.JWT_FGP_COOKIENAME, "", { httpOnly: true, maxAge: +new Date(0) })
+      .cookie("token", "", { httpOnly: true, maxAge: +new Date(0) })
+      .json({ status: "success" });
   }
 };
 
