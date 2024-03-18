@@ -12,7 +12,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
       const cookieOptions = {
         httpOnly: process.env.COOKIE_HTTPONLY,
         secure: process.env.COOKIE_SECURE,
-        // sameSite: process.env.COOKIE_SAMESITE, // I have had to comment this out as currently honested in different locations
+        sameSite: process.env.COOKIE_SAMESITE, // Set to 'None' as honested in different locations, update this for real world production
         maxAge: +process.env.COOKIE_MAXAGE,
       };
 
@@ -25,20 +25,7 @@ const setTokenResponse = (req: I_RequestUser, status: number, res: Response, tas
         .json({ status: "success", data: userData });
     }
   } else if (task === "logout") {
-    const cookieOptions = {
-      httpOnly: process.env.COOKIE_HTTPONLY,
-      secure: process.env.COOKIE_SECURE,
-      // sameSite: process.env.COOKIE_SAMESITE, // I have had to comment this out as currently honested in different locations
-      maxAge: 0,
-    };
-
-    res
-      .status(status)
-      // @ts-expect-error
-      .cookie(process.env.JWT_FGP_COOKIENAME, "", cookieOptions)
-      // @ts-expect-error
-      .cookie("token", "", cookieOptions)
-      .json({ status: "success" });
+    res.status(status).cookie("", "", {}).json({ status: "success" });
   }
 };
 
