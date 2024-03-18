@@ -27,10 +27,16 @@ export const protect = asyncHandler(async (req: I_RequestUser, res: Response, ne
   }
 
   try {
-    const { userId, userFingerPrint } = jwt.verify(token, process.env.JWT_SECRET) as I_JWTToken;
+    const { userId, userFingerPrint, usercsrf } = jwt.verify(token, process.env.JWT_SECRET) as I_JWTToken;
 
     if (userFingerPrint !== Crypto.createHash("sha256").update(userFingerprint).digest("hex")) {
       console.error("FGP check");
+      next(res.status(401).json({ status: "error", message: "Not authorized" }));
+    }
+
+    // @ts-expect-error
+    if (usercsrf !== Crypto.createHash("sha256").update(req.headers.usercsrf).digest("hex")) {
+      console.error("CSRF check");
       next(res.status(401).json({ status: "error", message: "Not authorized" }));
     }
 
