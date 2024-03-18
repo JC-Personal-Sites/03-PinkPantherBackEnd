@@ -36,7 +36,7 @@ if (
   !("JWT_FGP_COOKIENAME" in process.env) ||
   !("COOKIE_HTTPONLY" in process.env) ||
   !("COOKIE_SECURE" in process.env) ||
-  // !("COOKIE_SAMESITE" in process.env) || // I have had to comment this out as currently honested in different locations
+  !("COOKIE_SAMESITE" in process.env) ||
   !("COOKIE_MAXAGE" in process.env) ||
   !("JC_ALLOWED_ORIGINS_CORS" in process.env)
 ) {
