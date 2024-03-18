@@ -73,10 +73,6 @@ export const login = asyncHandler(async (req: I_RequestUser, res: Response, next
   setTokenResponse(req, 200, res, "login");
 });
 
-export const loggedIn = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
-  res.status(201).json({ status: "success" });
-});
-
 export const logout = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   setTokenResponse(req, 201, res, "logout");
 });

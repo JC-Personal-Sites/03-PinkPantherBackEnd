@@ -88,17 +88,21 @@ UserSchema.pre("save", async function (next) {
 UserSchema.methods.getToken = function () {
   const userFingerprint = Crypto.randomBytes(64).toString("hex");
   const userFingerprintHash = Crypto.createHash("sha256").update(userFingerprint).digest("hex");
+  const usercsrf = Crypto.randomBytes(64).toString("hex"); // CSRF is cross-site request forgery
+  const usercsrfHash = Crypto.createHash("sha256").update(usercsrf).digest("hex");
 
   return {
     token: jwt.sign(
       {
         userId: this._id,
         userFingerPrint: userFingerprintHash,
+        usercsrf: usercsrfHash,
         expiresIn: process.env.JWT_EXPIRYTIME,
       },
       process.env.JWT_SECRET as Secret
     ),
     fingerPrint: userFingerprint,
+    csrf: usercsrf,
   };
 };
 

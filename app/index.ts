@@ -75,7 +75,8 @@ app.use(hpp());
 app.use(
   cors({
     origin: process.env.JC_ALLOWED_ORIGINS_CORS,
-    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+    allowedHeaders: ["userCsrf", "Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+    exposedHeaders: ["userCsrf"],
     credentials: true,
   })
 );
