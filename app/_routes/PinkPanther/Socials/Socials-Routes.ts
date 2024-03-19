@@ -2,6 +2,6 @@ import express from "express";
 
 import getSocials from "./Socials-Controller";
 
-const socialsRoute = express.Router().get("/", getSocials);
+const ppSocialsRoute = express.Router().get("/", getSocials);
 
-export default socialsRoute;
+export default ppSocialsRoute;

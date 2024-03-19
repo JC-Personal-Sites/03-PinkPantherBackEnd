@@ -9,7 +9,7 @@ const apiLimited = rateLimit({
   max: 6,
 });
 
-const ppAuthenticationRoute = express
+const dottAuthenticationRoute = express
   .Router()
   .post("/login", apiLimited, login)
   .get("/logout", logout)
@@ -17,4 +17,4 @@ const ppAuthenticationRoute = express
   .post("/approveReset", protect, approveReset)
   .post("/resetPassword", protect, resetPassword);
 
-export default ppAuthenticationRoute;
+export default dottAuthenticationRoute;

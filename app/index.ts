@@ -6,16 +6,25 @@ import connectDB from "./_mongoDB"; // mongo DB connection
 import errorHandler from "./middleware/errorHandler"; // Express bespoke error handling
 
 // ---- Routes ----------------------------------
-import appendixRoute from "./_routes/PinkPanther/Appendix/Appendix-Routes";
-import authenticationRoute from "./_routes/PinkPanther/Authentication/Authentication-Routes";
-import navBarRoute from "./_routes/PinkPanther/NavBar/NavBar-Routes";
 import rootRoute from "./_routes/_Root/Root-Routes";
-import pictureRoute from "./_routes/PinkPanther/Pictures/Pictures-Routes";
-import roleRoute from "./_routes/PinkPanther/Roles/Roles-Routes";
-import socialsRoute from "./_routes/PinkPanther/Socials/Socials-Routes";
-import userRoute from "./_routes/PinkPanther/Users/Users-Routes";
-import videoRoute from "./_routes/PinkPanther/Videos/Videos-Routes";
-import wikipediaRoute from "./_routes/PinkPanther/Wikipedia/Wikipedia-Routes";
+import ppAppendixRoute from "./_routes/PinkPanther/Appendix/Appendix-Routes";
+import ppAuthenticationRoute from "./_routes/PinkPanther/Authentication/Authentication-Routes";
+import ppNavBarRoute from "./_routes/PinkPanther/NavBar/NavBar-Routes";
+import ppPictureRoute from "./_routes/PinkPanther/Pictures/Pictures-Routes";
+import ppRoleRoute from "./_routes/PinkPanther/Roles/Roles-Routes";
+import ppSocialsRoute from "./_routes/PinkPanther/Socials/Socials-Routes";
+import ppUserRoute from "./_routes/PinkPanther/Users/Users-Routes";
+import ppVideoRoute from "./_routes/PinkPanther/Videos/Videos-Routes";
+import ppWikipediaRoute from "./_routes/PinkPanther/Wikipedia/Wikipedia-Routes";
+import dottAppendixRoute from "./_routes/DayOfTheTentacle/Appendix/Appendix-Routes";
+import dottAuthenticationRoute from "./_routes/DayOfTheTentacle/Authentication/Authentication-Routes";
+import dottNavBarRoute from "./_routes/DayOfTheTentacle/NavBar/NavBar-Routes";
+import dottPictureRoute from "./_routes/DayOfTheTentacle/Pictures/Pictures-Routes";
+import dottRoleRoute from "./_routes/DayOfTheTentacle/Roles/Roles-Routes";
+import dottSocialsRoute from "./_routes/DayOfTheTentacle/Socials/Socials-Routes";
+import dottUserRoute from "./_routes/DayOfTheTentacle/Users/Users-Routes";
+import dottVideoRoute from "./_routes/DayOfTheTentacle/Videos/Videos-Routes";
+import dottWikipediaRoute from "./_routes/DayOfTheTentacle/Wikipedia/Wikipedia-Routes";
 // -----------------------------------------------
 
 // ========== Addition Security =============== \\
@@ -100,15 +109,24 @@ connectDB();
 // ================================================
 // Mount Routers
 app.use("/", rootRoute);
-app.use("/pinkpanther/authentication", authenticationRoute);
-app.use("/pinkpanther/appendix", appendixRoute);
-app.use("/pinkpanther/navBar", navBarRoute);
-app.use("/pinkpanther/pictures", pictureRoute);
-app.use("/pinkpanther/roles", roleRoute);
-app.use("/pinkpanther/socials", socialsRoute);
-app.use("/pinkpanther/videos", videoRoute);
-app.use("/pinkpanther/users", userRoute);
-app.use("/pinkpanther/wikipedia", wikipediaRoute);
+app.use("/pinkpanther/authentication", ppAuthenticationRoute);
+app.use("/pinkpanther/appendix", ppAppendixRoute);
+app.use("/pinkpanther/navBar", ppNavBarRoute);
+app.use("/pinkpanther/pictures", ppPictureRoute);
+app.use("/pinkpanther/roles", ppRoleRoute);
+app.use("/pinkpanther/socials", ppSocialsRoute);
+app.use("/pinkpanther/videos", ppVideoRoute);
+app.use("/pinkpanther/users", ppUserRoute);
+app.use("/pinkpanther/wikipedia", ppWikipediaRoute);
+app.use("/pinkpanther/authentication", dottAuthenticationRoute);
+app.use("/pinkpanther/appendix", dottAppendixRoute);
+app.use("/pinkpanther/navBar", dottNavBarRoute);
+app.use("/pinkpanther/pictures", dottPictureRoute);
+app.use("/pinkpanther/roles", dottRoleRoute);
+app.use("/pinkpanther/socials", dottSocialsRoute);
+app.use("/pinkpanther/videos", dottVideoRoute);
+app.use("/pinkpanther/users", dottUserRoute);
+app.use("/pinkpanther/wikipedia", dottWikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'

@@ -3,11 +3,11 @@ import { createAppendix, deleteAppendix, getAppendixs, updateAppendix } from "./
 
 import { protect, authorizedRoles } from "../_localHelpers/authorisationHelper";
 
-const ppAppendixRoute = express
+const dottAppendixRoute = express
   .Router()
   .get("/", getAppendixs)
   .post("/", protect, authorizedRoles("Admin", "Visitor"), createAppendix)
   .put("/", protect, authorizedRoles("Admin", "Visitor"), updateAppendix)
   .delete("/", protect, authorizedRoles("Admin", "Visitor"), deleteAppendix);
 
-export default ppAppendixRoute;
+export default dottAppendixRoute;
