@@ -88,4 +88,9 @@ https://youtu.be/KgnJNJk9-to?si=Dj3ZS98DQ5CYSID5
 
 ## 18-03-2024
 
-- How to create a key: node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"
+- ReNewed keys = How to create a key: node -e "console.log(require('crypto').randomBytes(64).toString('base64'))"
+- Implemented the CSRF process on API Endpoint calls, added to headers.
+- I decided to not do the samesite 'strict' as I felt these were not of benefit for this application.
+- If this was a production app and Authentication was a major part of the app I would look to use a library such as https://auth0.com/ or https://clerk.com/
+- Finsihed out the logout functionality to reset cookies and remove user data on the FE.
+  <r>FE - Merged issue 30 into main - Authentication Part 2</r>
