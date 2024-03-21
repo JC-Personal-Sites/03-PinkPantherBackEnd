@@ -118,15 +118,15 @@ app.use("/pinkpanther/socials", ppSocialsRoute);
 app.use("/pinkpanther/videos", ppVideoRoute);
 app.use("/pinkpanther/users", ppUserRoute);
 app.use("/pinkpanther/wikipedia", ppWikipediaRoute);
-app.use("/pinkpanther/authentication", dottAuthenticationRoute);
-app.use("/pinkpanther/appendix", dottAppendixRoute);
-app.use("/pinkpanther/navBar", dottNavBarRoute);
-app.use("/pinkpanther/pictures", dottPictureRoute);
-app.use("/pinkpanther/roles", dottRoleRoute);
-app.use("/pinkpanther/socials", dottSocialsRoute);
-app.use("/pinkpanther/videos", dottVideoRoute);
-app.use("/pinkpanther/users", dottUserRoute);
-app.use("/pinkpanther/wikipedia", dottWikipediaRoute);
+app.use("/dayofthetentacle/authentication", dottAuthenticationRoute);
+app.use("/dayofthetentacle/appendix", dottAppendixRoute);
+app.use("/dayofthetentacle/navBar", dottNavBarRoute);
+app.use("/dayofthetentacle/pictures", dottPictureRoute);
+app.use("/dayofthetentacle/roles", dottRoleRoute);
+app.use("/dayofthetentacle/socials", dottSocialsRoute);
+app.use("/dayofthetentacle/videos", dottVideoRoute);
+app.use("/dayofthetentacle/users", dottUserRoute);
+app.use("/dayofthetentacle/wikipedia", dottWikipediaRoute);
 // ================================================
 
 app.use(errorHandler); // Has to go after 'Mountings'
