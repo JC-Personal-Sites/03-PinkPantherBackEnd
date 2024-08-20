@@ -16,10 +16,10 @@ export const createRole = asyncHandler(async (req: I_RequestUser, res: Response,
 
 export const updateRole = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   await RoleSchema.findByIdAndUpdate(req.body._id, req.body, { new: true, runValidators: true });
-  res.status(201).json({ status: "success" });
+  res.status(202).json({ status: "success" });
 });
 
 export const deleteRole = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   await RoleSchema.deleteOne({ _id: req.query.id });
-  res.status(201).json({ status: "success" });
+  res.status(202).json({ status: "success" });
 });

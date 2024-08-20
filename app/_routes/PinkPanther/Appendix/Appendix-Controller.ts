@@ -16,10 +16,10 @@ export const createAppendix = asyncHandler(async (req: I_RequestUser, res: Respo
 
 export const updateAppendix = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   await AppendixSchema.findByIdAndUpdate(req.body._id, req.body, { new: true, runValidators: true });
-  res.status(201).json({ status: "success" });
+  res.status(202).json({ status: "success" });
 });
 
 export const deleteAppendix = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
   await AppendixSchema.deleteOne({ _id: req.query.id });
-  res.status(201).json({ status: "success" });
+  res.status(202).json({ status: "success" });
 });
