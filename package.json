@@ -6,7 +6,7 @@
   "author": "justCoder - Justin Heath",
   "license": "ISC",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon app/index.ts",
     "lint": "npx eslint . --fix"
