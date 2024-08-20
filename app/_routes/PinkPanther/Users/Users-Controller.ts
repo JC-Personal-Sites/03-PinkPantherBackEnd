@@ -32,7 +32,7 @@ export const createUser = asyncHandler(async (req: Request, res: Response, next:
     },
   });
 
-  res.status(200).json({ status: "success" });
+  res.status(201).json({ status: "success" });
 });
 
 export const updateUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
@@ -47,7 +47,7 @@ export const updateUser = asyncHandler(async (req: I_RequestUser, res: Response,
     new: true,
     runValidators: true,
   });
-  res.status(200).json({ status: "success", data: updateUser });
+  res.status(202).json({ status: "success", data: updateUser });
 });
 
 export const deleteUser = asyncHandler(async (req: I_RequestUser, res: Response, next: NextFunction) => {
@@ -59,7 +59,7 @@ export const deleteUser = asyncHandler(async (req: I_RequestUser, res: Response,
   }
 
   // deleteUser.remove();
-  res.status(200).json({ status: "success", data: {} });
+  res.status(202).json({ status: "success" });
 });
 
 export default getUsers;
